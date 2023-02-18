@@ -28,7 +28,6 @@ config/icon="res://Sprites/icon.png"
 [debug]
 
 settings/fps/force_fps=15
-settings/stdout/print_fps=true
 
 [display]
 

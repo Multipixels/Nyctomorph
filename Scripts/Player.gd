@@ -1,50 +1,35 @@
-extends Sprite
+extends KinematicBody2D
 
-signal move_frame(frame);	
+signal move_frame(frame);
 
-var move_timer_default = 1;
-var move_timer = 0;
+var current_frame = 0;
 
-var current_frame = 1;
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
+var motionHorizontal = 0;
+var motionVertical = 0;
+var motion = Vector2(0, 0);
+var previousMotion = Vector2(0, 0);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down")) and move_timer <= 0:
-		move_timer = move_timer_default;
-		move();
-		
-	move_timer -= delta * 15;
-	  
-	
-func move():
-	if Input.is_action_pressed("move_right"):
-	  position.x += 1;
-	if Input.is_action_pressed("move_left"):
-	  position.x -= 1;
-	if Input.is_action_pressed("move_up"):
-	  position.y -= 1;
-	if Input.is_action_pressed("move_down"):
-	  position.y += 1;
+func process(delta):
+	pass
 
-func _on_Area2D_area_entered(area):
-	var to_frame = area.name.right(1).get_slice("-", 0);
-	print(to_frame);
+func _physics_process(delta):
+	motionHorizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"));
+	motionVertical = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"));
 	
-	if int(to_frame) == current_frame:
-		emit_signal("move_frame", int(to_frame)+1);
-		current_frame = int(to_frame)+1
-		position.x += 6
-	else:
-		emit_signal("move_frame", int(to_frame));
-		current_frame = int(to_frame)
-		position.x -= 6
+	previousMotion = motion;
+	motion = Vector2(motionHorizontal, motionVertical).normalized()*12;
 	
-	move_timer = 12;
+	if (motion != previousMotion):
+		position.x = round(position.x);
+		position.y = round(position.y);
+	
+	if (motion != Vector2(0, 0)):
+		move_and_slide(motion);
 		
-	
-	
+	if position.x >= 0 and int(position.x) / 48 != current_frame:
+		current_frame = int(position.x) / 48;
+		emit_signal("move_frame", current_frame);
+	elif position.x < 0 and int(position.x) / 48 - 1 != current_frame:
+		current_frame = int(position.x) / 48 - 1;
+		emit_signal("move_frame", current_frame);
