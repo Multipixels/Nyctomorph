@@ -14,7 +14,7 @@ func _ready():
 
 func _on_Player_move_frame(frame):
 	t = 0
-	newPosition.x = frame*48 - 48;
+	newPosition.x = frame*48-48;
 	
 
 func _physics_process(delta):

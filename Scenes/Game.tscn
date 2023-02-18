@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/image0.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Camera2D-2.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/white.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/SlidyCamera.gd" type="Script" id=5]
+[ext_resource path="res://Shaders/palleteShader.shader" type="Shader" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 41 )
@@ -12,58 +13,95 @@ extents = Vector2( 1, 41 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1.5, 2 )
 
+[sub_resource type="ShaderMaterial" id=4]
+render_priority = 1
+shader = ExtResource( 6 )
+shader_param/oldColor1 = Color( 0.780392, 0.941176, 0.847059, 1 )
+shader_param/oldColor2 = Color( 0.262745, 0.321569, 0.239216, 1 )
+shader_param/newColor1 = Color( 0.607843, 0.780392, 0, 1 )
+shader_param/newColor2 = Color( 0.168627, 0.247059, 0.0352941, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+render_priority = 1
+shader = ExtResource( 6 )
+shader_param/oldColor1 = Color( 0.780392, 0.941176, 0.847059, 1 )
+shader_param/oldColor2 = Color( 0.262745, 0.321569, 0.239216, 1 )
+shader_param/newColor1 = Color( 0.529412, 0.568627, 0.533333, 1 )
+shader_param/newColor2 = Color( 0.101961, 0.0980392, 0.0784314, 1 )
+
 [node name="Node2D" type="Node2D"]
 
-[node name="Camera2D-2" type="Camera2D" parent="."]
-current = true
-script = ExtResource( 5 )
+[node name="Shader" type="Control" parent="."]
+margin_left = -24.0
+margin_top = -42.0
+margin_right = 16.0
+margin_bottom = -2.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource( 4 )
-
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 96, 0 )
+[node name="Background" type="Sprite" parent="Shader"]
+position = Vector2( 120, 42 )
 texture = ExtResource( 1 )
 
-[node name="F1-2" type="Area2D" parent="Background"]
+[node name="F1-2" type="Area2D" parent="Shader/Background"]
 
-[node name="SquareCollider" type="CollisionShape2D" parent="Background/F1-2"]
+[node name="SquareCollider" type="CollisionShape2D" parent="Shader/Background/F1-2"]
 position = Vector2( -72, 0 )
 shape = SubResource( 1 )
 
-[node name="F2-3" type="Area2D" parent="Background"]
+[node name="F2-3" type="Area2D" parent="Shader/Background"]
 position = Vector2( 48, 0 )
 
-[node name="SquareCollider" type="CollisionShape2D" parent="Background/F2-3"]
+[node name="SquareCollider" type="CollisionShape2D" parent="Shader/Background/F2-3"]
 position = Vector2( -72, 0 )
 shape = SubResource( 1 )
 
-[node name="F3-4" type="Area2D" parent="Background"]
+[node name="F3-4" type="Area2D" parent="Shader/Background"]
 position = Vector2( 96, 0 )
 
-[node name="SquareCollider" type="CollisionShape2D" parent="Background/F3-4"]
+[node name="SquareCollider" type="CollisionShape2D" parent="Shader/Background/F3-4"]
 position = Vector2( -72, 0 )
 shape = SubResource( 1 )
 
-[node name="F4-5" type="Area2D" parent="Background"]
+[node name="F4-5" type="Area2D" parent="Shader/Background"]
 position = Vector2( 144, 0 )
 
-[node name="SquareCollider" type="CollisionShape2D" parent="Background/F4-5"]
+[node name="SquareCollider" type="CollisionShape2D" parent="Shader/Background/F4-5"]
 position = Vector2( -72, 0 )
 shape = SubResource( 1 )
 
-[node name="Player" type="Sprite" parent="."]
-position = Vector2( -9, -27 )
+[node name="Player" type="Sprite" parent="Shader"]
+position = Vector2( 15, 15 )
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 script = ExtResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="Player"]
+[node name="Area2D" type="Area2D" parent="Shader/Player"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/Player/Area2D"]
 position = Vector2( 0.5, 0 )
 shape = SubResource( 2 )
 
-[connection signal="move_frame" from="Player" to="Camera2D" method="_on_Player_move_frame"]
-[connection signal="move_frame" from="Player" to="Camera2D-2" method="_on_Player_move_frame"]
-[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_area_entered"]
+[node name="Pallete3" type="TextureRect" parent="Shader"]
+material = SubResource( 4 )
+margin_left = -339.0
+margin_top = -189.0
+margin_right = 538.0
+margin_bottom = 336.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Pallete2" type="TextureRect" parent="Shader"]
+visible = false
+material = SubResource( 3 )
+margin_left = -195.0
+margin_top = -97.0
+margin_right = 425.0
+margin_bottom = 269.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="SlidyCamera" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 5 )
+
+[connection signal="move_frame" from="Shader/Player" to="SlidyCamera" method="_on_Player_move_frame"]
+[connection signal="area_entered" from="Shader/Player/Area2D" to="Shader/Player" method="_on_Area2D_area_entered"]
