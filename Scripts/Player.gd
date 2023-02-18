@@ -43,6 +43,8 @@ func _on_Area2D_area_entered(area):
 		emit_signal("move_frame", int(to_frame));
 		current_frame = int(to_frame)
 		position.x -= 6
+	
+	move_timer = 12;
 		
 	
 	
