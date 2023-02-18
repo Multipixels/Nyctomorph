@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -21,7 +21,17 @@ _global_script_class_icons={
 [application]
 
 config/name="Nokia"
-config/icon="res://icon.png"
+config/icon="res://Sprites/icon.png"
+
+[display]
+
+window/size/width=48
+window/size/height=84
+window/size/test_width=480
+window/size/test_height=840
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [editor]
 
@@ -41,4 +51,3 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
