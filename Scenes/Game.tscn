@@ -1,15 +1,28 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sprites/image0.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/Walk.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/white.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/SlidyCamera.gd" type="Script" id=5]
 [ext_resource path="res://Shaders/palleteShader.shader" type="Shader" id=6]
 [ext_resource path="res://Sprites/rock.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/PalleteChanger.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 6 )
+shader_param/oldColor1 = Color( 0.607843, 0.780392, 0, 1 )
+shader_param/oldColor2 = Color( 0.168627, 0.247059, 0.0352941, 1 )
+shader_param/oldColor3 = Color( 0.529412, 0.568627, 0.533333, 1 )
+shader_param/oldColor4 = Color( 0.101961, 0.0980392, 0.0784314, 1 )
+shader_param/newColor1 = Color( 0.780392, 0.941176, 0.847059, 1 )
+shader_param/newColor2 = Color( 0.262745, 0.321569, 0.239216, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 render_priority = 1
@@ -30,9 +43,6 @@ shader_param/oldColor3 = Color( 0.529412, 0.568627, 0.533333, 1 )
 shader_param/oldColor4 = Color( 0.101961, 0.0980392, 0.0784314, 1 )
 shader_param/newColor1 = Color( 0.607843, 0.780392, 0, 1 )
 shader_param/newColor2 = Color( 0.168627, 0.247059, 0.0352941, 1 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 2 )
 
 [node name="Game" type="Node2D"]
 position = Vector2( -24, 0 )
@@ -62,26 +72,6 @@ shape = SubResource( 5 )
 [node name="Sprite" type="Sprite" parent="Shader/Rock"]
 texture = ExtResource( 7 )
 
-[node name="Pallete2" type="TextureRect" parent="Shader"]
-visible = false
-material = SubResource( 3 )
-margin_left = -195.0
-margin_top = -97.0
-margin_right = 425.0
-margin_bottom = 269.0
-texture = ExtResource( 4 )
-expand = true
-
-[node name="Pallete3" type="TextureRect" parent="Shader"]
-visible = false
-material = SubResource( 4 )
-margin_left = -339.0
-margin_top = -189.0
-margin_right = 538.0
-margin_bottom = 336.0
-texture = ExtResource( 4 )
-expand = true
-
 [node name="Player" type="KinematicBody2D" parent="Shader"]
 position = Vector2( 24, 42 )
 script = ExtResource( 3 )
@@ -92,5 +82,38 @@ shape = SubResource( 2 )
 
 [node name="PlayerSprite" type="Sprite" parent="Shader/Player"]
 texture = ExtResource( 2 )
+offset = Vector2( 0.5, 0 )
+
+[node name="PalleteChanger" type="Node" parent="Shader"]
+script = ExtResource( 8 )
+
+[node name="Pallete1" type="TextureRect" parent="Shader/PalleteChanger"]
+material = SubResource( 6 )
+margin_left = -448.0
+margin_top = -236.0
+margin_right = 172.0
+margin_bottom = 130.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Pallete2" type="TextureRect" parent="Shader/PalleteChanger"]
+visible = false
+material = SubResource( 3 )
+margin_left = -243.0
+margin_top = -139.0
+margin_right = 377.0
+margin_bottom = 227.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Pallete3" type="TextureRect" parent="Shader/PalleteChanger"]
+visible = false
+material = SubResource( 4 )
+margin_left = -387.0
+margin_top = -231.0
+margin_right = 490.0
+margin_bottom = 294.0
+texture = ExtResource( 4 )
+expand = true
 
 [connection signal="move_frame" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_frame"]
