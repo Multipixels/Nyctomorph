@@ -22,7 +22,8 @@ void fragment() {
 	} else if (distance(t, oldColor2) < 0.01 || distance(t, oldColor4) < 0.01) {
 		COLOR = newColor2;
 	} else if (distance(t, vec4(0, 0, 0, 0)) < 1.18) {
-		COLOR = t
+		COLOR = newColor2;
+		//COLOR = t;
 	} else {
 		COLOR = newColor2;
 	}

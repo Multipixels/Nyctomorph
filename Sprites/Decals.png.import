@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background Trees.png-fb814a03dba8540a31a7abb0f4dbfe13.stex"
+path="res://.import/Decals.png-8eb721b601ba97abc03f98c5110eaf43.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background Trees.png"
-dest_files=[ "res://.import/Background Trees.png-fb814a03dba8540a31a7abb0f4dbfe13.stex" ]
+source_file="res://Sprites/Decals.png"
+dest_files=[ "res://.import/Decals.png-8eb721b601ba97abc03f98c5110eaf43.stex" ]
 
 [params]
 

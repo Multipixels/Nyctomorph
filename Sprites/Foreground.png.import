@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LightBall.png-b74332346108eddfb30ffd03b1df066d.stex"
+path="res://.import/Foreground.png-b052f84004a56deef4949f57e837554a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/LightBall.png"
-dest_files=[ "res://.import/LightBall.png-b74332346108eddfb30ffd03b1df066d.stex" ]
+source_file="res://Sprites/Foreground.png"
+dest_files=[ "res://.import/Foreground.png-b052f84004a56deef4949f57e837554a.stex" ]
 
 [params]
 
