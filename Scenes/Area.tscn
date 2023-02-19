@@ -1,0 +1,168 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Sprites/Background Trees.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Trees.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Decals.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Foreground.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Deep background.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Environment.gd" type="Script" id=6]
+[ext_resource path="res://Shaders/Materials/generic.tres" type="Material" id=7]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Deep background.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 48, 84 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=2]
+0/name = "Background Trees.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 480, 48 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 48, 48 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=3]
+0/name = "Trees.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 1764, 84 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 84, 84 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=4]
+0/name = "Decals.png 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 528, 24 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 24, 24 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=5]
+0/name = "Foreground.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 840, 84 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 84, 84 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="Area" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="TileMap" parent="."]
+material = ExtResource( 7 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 48, 84 )
+cell_quadrant_size = 48
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="BackgroundTrees" type="TileMap" parent="."]
+material = ExtResource( 7 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 1, 1 )
+cell_quadrant_size = 48
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="Trees" type="TileMap" parent="."]
+material = ExtResource( 7 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 1, 1 )
+cell_quadrant_size = 84
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="BackDecals" type="TileMap" parent="."]
+material = ExtResource( 7 )
+tile_set = SubResource( 4 )
+cell_size = Vector2( 1, 1 )
+cell_quadrant_size = 84
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+
+[node name="Foreground" type="TileMap" parent="."]
+material = ExtResource( 7 )
+tile_set = SubResource( 5 )
+cell_size = Vector2( 4, 4 )
+cell_quadrant_size = 84
+cell_tile_origin = 2
+cell_y_sort = true
+show_collision = true
+format = 1
+
+[node name="Boundaries" type="StaticBody2D" parent="."]

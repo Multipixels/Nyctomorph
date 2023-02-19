@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/palleteShader.shader" type="Shader" id=1]
+[ext_resource path="res://Sprites/white.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/oldColor1 = Color( 0.607843, 0.780392, 0, 1 )
+shader_param/oldColor2 = Color( 0.168627, 0.247059, 0.0352941, 1 )
+shader_param/oldColor3 = Color( 0.529412, 0.568627, 0.533333, 1 )
+shader_param/oldColor4 = Color( 0.101961, 0.0980392, 0.0784314, 1 )
+shader_param/newColor1 = Color( 0.780392, 0.941176, 0.847059, 1 )
+shader_param/newColor2 = Color( 0.262745, 0.321569, 0.239216, 1 )
+
+[node name="NormalShader" type="TextureRect"]
+visible = false
+material = SubResource( 6 )
+margin_left = -624.0
+margin_top = -236.0
+margin_right = 508.0
+margin_bottom = 130.0
+texture = ExtResource( 2 )
+expand = true
