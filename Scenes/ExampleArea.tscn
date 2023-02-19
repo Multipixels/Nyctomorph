@@ -214,13 +214,16 @@ tile_data = PoolIntArray( 720767, 0, 2, 720772, 0, 6, 720776, 0, 9, 720795, 0, 7
 position = Vector2( 0, 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
+visible = false
 position = Vector2( -466, 8.5 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Border"]
+visible = false
 position = Vector2( 6, 8.5 )
 shape = SubResource( 7 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Border"]
+visible = false
 position = Vector2( 436, 9.25 )
 shape = SubResource( 8 )

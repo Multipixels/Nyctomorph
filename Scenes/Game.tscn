@@ -55,10 +55,19 @@ margin_top = -42.0
 margin_right = 16.0
 margin_bottom = -2.0
 
+[node name="EditorLight" type="Light2D" parent="Shader"]
+visible = false
+position = Vector2( -134, 44 )
+scale = Vector2( 22.4286, 3.27381 )
+editor_only = true
+texture = ExtResource( 10 )
+mode = 2
+
 [node name="PalleteChanger" type="Node" parent="Shader"]
 script = ExtResource( 8 )
 
 [node name="Pallete1" type="TextureRect" parent="Shader/PalleteChanger"]
+visible = false
 material = SubResource( 6 )
 margin_left = -624.0
 margin_top = -236.0
@@ -112,10 +121,10 @@ visible = false
 texture = ExtResource( 7 )
 
 [node name="Area" parent="Shader" instance=ExtResource( 9 )]
-position = Vector2( -1, 0 )
+position = Vector2( -10, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="Shader"]
-position = Vector2( 28, 59 )
+position = Vector2( 30, 53 )
 script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="Sprite" parent="Shader/Player"]
@@ -126,9 +135,8 @@ position = Vector2( 0, 12 )
 shape = SubResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="Shader/Player"]
-position = Vector2( 39, -11 )
+position = Vector2( 7, -6 )
 texture = ExtResource( 10 )
-offset = Vector2( -39, 11 )
 mode = 2
 
 [connection signal="move_frame" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_frame"]
