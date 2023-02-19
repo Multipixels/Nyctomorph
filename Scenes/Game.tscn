@@ -27,47 +27,46 @@ margin_bottom = -2.0
 
 [node name="YSort" type="YSort" parent="Shader"]
 
-[node name="SlidyCamera" type="Camera2D" parent="Shader"]
+[node name="SlidyCamera" type="Camera2D" parent="Shader/YSort"]
 position = Vector2( 24, 42 )
 current = true
 script = ExtResource( 5 )
 
-[node name="Background" type="Sprite" parent="Shader"]
+[node name="Background" type="Sprite" parent="Shader/YSort"]
 visible = false
 position = Vector2( 120, 42 )
 texture = ExtResource( 10 )
 
-[node name="Rock" type="StaticBody2D" parent="Shader"]
+[node name="Rock" type="StaticBody2D" parent="Shader/YSort"]
 visible = false
 position = Vector2( 37, 60 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/Rock"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/YSort/Rock"]
 visible = false
 position = Vector2( 1, 3 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="Sprite" type="Sprite" parent="Shader/Rock"]
+[node name="Sprite" type="Sprite" parent="Shader/YSort/Rock"]
 visible = false
 texture = ExtResource( 7 )
 
-[node name="Area" parent="Shader" instance=ExtResource( 1 )]
+[node name="Area" parent="Shader/YSort" instance=ExtResource( 1 )]
 
-[node name="Player" type="KinematicBody2D" parent="Shader"]
-position = Vector2( 28, 59 )
+[node name="Player" type="KinematicBody2D" parent="Shader/YSort"]
+position = Vector2( 30, 53 )
 script = ExtResource( 3 )
 
-[node name="PlayerSprite" type="Sprite" parent="Shader/Player"]
+[node name="PlayerSprite" type="Sprite" parent="Shader/YSort/Player"]
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/YSort/Player"]
 position = Vector2( 0, 12 )
 shape = SubResource( 2 )
 
-[node name="Light2D" type="Light2D" parent="Shader/Player"]
-position = Vector2( 39, -11 )
+[node name="Light2D" type="Light2D" parent="Shader/YSort/Player"]
+position = Vector2( 7, -6 )
 texture = ExtResource( 10 )
-offset = Vector2( -39, 11 )
 mode = 2
 
-[connection signal="move_frame" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_frame"]
+[connection signal="move_frame" from="Shader/YSort/Player" to="Shader/YSort/SlidyCamera" method="_on_Player_move_frame"]
