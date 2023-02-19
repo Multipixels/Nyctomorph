@@ -21,6 +21,12 @@ func _process(delta):
 	
 	if canMoveTimer <= 0:
 		canMove = true;
+		
+	if Input.is_action_just_pressed("light_toggle"):
+		if $TorchLight.is_visible():
+			$TorchLight.hide();
+		else:
+			$TorchLight.show();
 
 func _physics_process(_delta):
 	motionHorizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"));
