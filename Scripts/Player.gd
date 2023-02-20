@@ -11,7 +11,7 @@ var motionVertical = 0;
 var motion = Vector2(0, 0);
 var previousMotion = Vector2(0, 0);
 
-var playerSpeed = 50;
+export var playerSpeed = 25;
 var direction = 1;
 
 var canMove = true;

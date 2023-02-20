@@ -8,7 +8,10 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		reflect_editor_changes()
 	else:
-		select_shader(null)
+		queue_free()
+		
+func _input(event):
+	pass
 		
 func show_in_editor_set(new_value):
 	show_in_editor = new_value

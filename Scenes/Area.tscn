@@ -27,7 +27,7 @@
 [sub_resource type="TileSet" id=2]
 0/name = "Background Trees.png 0"
 0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, 0 )
+0/tex_offset = Vector2( 0, -48 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 480, 48 )
 0/tile_mode = 2
@@ -50,7 +50,7 @@
 [sub_resource type="TileSet" id=3]
 0/name = "Trees.png 0"
 0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
+0/tex_offset = Vector2( 0, -84 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 1764, 84 )
 0/tile_mode = 2
@@ -73,12 +73,12 @@
 [sub_resource type="TileSet" id=4]
 0/name = "Decals.png 0"
 0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
+0/tex_offset = Vector2( 0, -24 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 528, 24 )
+0/region = Rect2( 0, 0, 528, 34 )
 0/tile_mode = 2
 0/autotile/icon_coordinate = Vector2( 0, 0 )
-0/autotile/tile_size = Vector2( 24, 24 )
+0/autotile/tile_size = Vector2( 24, 34 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [  ]
@@ -96,7 +96,7 @@
 [sub_resource type="TileSet" id=5]
 0/name = "Foreground.png 0"
 0/texture = ExtResource( 4 )
-0/tex_offset = Vector2( 0, 0 )
+0/tex_offset = Vector2( 0, -100 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 840, 84 )
 0/tile_mode = 2
@@ -116,7 +116,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="Area" type="Node2D"]
+[node name="Area" type="YSort"]
 script = ExtResource( 6 )
 
 [node name="Background" type="TileMap" parent="."]
@@ -124,7 +124,6 @@ material = ExtResource( 7 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 48, 84 )
 cell_quadrant_size = 48
-cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 
@@ -157,6 +156,7 @@ format = 1
 
 [node name="Foreground" type="TileMap" parent="."]
 material = ExtResource( 7 )
+z_index = 3
 tile_set = SubResource( 5 )
 cell_size = Vector2( 4, 4 )
 cell_quadrant_size = 84

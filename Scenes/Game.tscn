@@ -1,12 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/ExampleArea.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites/Walk.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/campfire.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/SlidyCamera.gd" type="Script" id=5]
 [ext_resource path="res://UtilityScenes/EditorShader.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Shaders/outline.shader" type="Shader" id=7]
 [ext_resource path="res://Scenes/ExampleAreaOld.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/LightBall.png" type="Texture" id=10]
@@ -16,20 +14,6 @@ extents = Vector2( 5, 3 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 11, 7 )
-
-[sub_resource type="CanvasItemMaterial" id=7]
-light_mode = 2
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 7 )
-shader_param/color = Color( 0.780392, 0.941176, 0.847059, 1 )
-shader_param/width = 1.0
-shader_param/pattern = 0
-shader_param/inside = false
-shader_param/add_margins = true
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 2 )
 
 [node name="Game" type="Node2D"]
 position = Vector2( 0, 679 )
@@ -43,7 +27,6 @@ margin_bottom = -2.0
 [node name="EditorShader" parent="Shader" instance=ExtResource( 6 )]
 
 [node name="GreenShader" parent="Shader/EditorShader" index="0"]
-visible = true
 margin_left = -587.0
 margin_top = -188.0
 margin_right = 542.0
@@ -51,7 +34,6 @@ margin_bottom = 337.0
 rect_scale = Vector2( 1.1307, 6.02379 )
 
 [node name="GreyShader" parent="Shader/EditorShader" index="1"]
-visible = true
 margin_left = -675.0
 margin_top = -90.0
 margin_right = 554.0
@@ -59,17 +41,13 @@ margin_bottom = 276.0
 rect_scale = Vector2( 1.10714, 4.70872 )
 
 [node name="NormalShader" parent="Shader/EditorShader" index="2"]
-visible = true
 margin_left = -619.0
 margin_top = -193.0
 margin_right = 513.0
 margin_bottom = 173.0
 rect_scale = Vector2( 1.13544, 5.78248 )
 
-[node name="SlidyCamera" type="Camera2D" parent="Shader"]
-position = Vector2( 24, 42 )
-current = true
-script = ExtResource( 5 )
+[node name="SlidyCamera" parent="Shader" instance=ExtResource( 2 )]
 
 [node name="Background" type="Sprite" parent="Shader"]
 visible = false
@@ -142,6 +120,12 @@ shape = SubResource( 9 )
 [node name="ExampleArea" parent="Shader" instance=ExtResource( 1 )]
 visible = false
 
+[node name="Background" parent="Shader/ExampleArea" index="0"]
+cell_tile_origin = 2
+
+[node name="Foreground" parent="Shader/ExampleArea" index="4"]
+z_index = 0
+
 [node name="CollisionShape2D" parent="Shader/ExampleArea/Boundaries" index="0"]
 disabled = true
 
@@ -154,26 +138,9 @@ disabled = true
 [node name="CollisionShape2D4" parent="Shader/ExampleArea/Boundaries" index="3"]
 disabled = true
 
-[node name="Player" type="KinematicBody2D" parent="Shader"]
-material = SubResource( 7 )
-position = Vector2( 30, 53 )
-script = ExtResource( 3 )
+[node name="Player" parent="Shader" instance=ExtResource( 3 )]
+position = Vector2( 36, 70 )
 
-[node name="MainSprite" type="Sprite" parent="Shader/Player"]
-material = SubResource( 8 )
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/Player"]
-position = Vector2( 0, 12 )
-shape = SubResource( 2 )
-
-[node name="TorchLight" type="Light2D" parent="Shader/Player"]
-position = Vector2( 7, -6 )
-texture = ExtResource( 10 )
-mode = 2
-
-[connection signal="body_entered" from="Shader/AreaFloor5/Interactable/ArrowUp" to="Shader/Player" method="_on_ArrowUp_body_entered"]
-[connection signal="body_entered" from="Shader/AreaFloor6/Interactable/ArrowDown" to="Shader/Player" method="_on_ArrowDown_body_entered"]
 [connection signal="move_floor" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_floor"]
 [connection signal="move_frame" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_frame"]
 

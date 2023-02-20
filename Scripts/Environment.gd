@@ -11,6 +11,7 @@ onready var Foreground = $Foreground
 onready var LightMaterial = preload("res://Shaders/Materials/light_object.tres")
 onready var GenericMaterial = preload("res://Shaders/Materials/generic.tres")
 
+export(bool) var lighting_enabled = true
 export(bool) var lighting_in_editor = false setget set_editor_lighting
 
 func _ready() -> void:
@@ -18,7 +19,10 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		reflect_editor_changes()
 	else:
-		give_material(LightMaterial)
+		if lighting_enabled:
+			give_material(LightMaterial)
+		else:
+			give_material(GenericMaterial)
 
 func give_material(material) -> void:
 	Background.material = material
