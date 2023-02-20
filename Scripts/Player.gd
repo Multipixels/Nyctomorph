@@ -1,15 +1,17 @@
 extends KinematicBody2D
 
 signal move_frame(frame);
+signal move_floor(flooor);
 
 var current_frame = 0;
+var current_floor = 5;
 
 var motionHorizontal = 0;
 var motionVertical = 0;
 var motion = Vector2(0, 0);
 var previousMotion = Vector2(0, 0);
 
-var playerSpeed = 15;
+var playerSpeed = 50;
 var direction = 1;
 
 var canMove = true;
@@ -56,3 +58,21 @@ func _physics_process(_delta):
 		position.x = round(position.x);
 		position.y = round(position.y);
 		canMoveTimer = 0.75
+
+
+func _on_ArrowUp_body_entered(body):
+	current_floor += 1;
+	canMove = false;
+	emit_signal("move_floor", current_floor);
+	canMoveTimer = 1;
+	
+	position.y -= 148;
+
+
+func _on_ArrowDown_body_entered(body):
+	current_floor -= 1;
+	canMove = false;
+	emit_signal("move_floor", current_floor);
+	canMoveTimer = 1;
+	
+	position.y += 148;
