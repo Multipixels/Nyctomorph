@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/ExampleArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/Twig.png" type="Texture" id=4]
-[ext_resource path="res://UtilityScenes/EditorShader.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Shaders/GreenShader.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Twig.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Campfire.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/campfire.png" type="Texture" id=6]
+[ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/ExampleAreaOld.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/LightBall.png" type="Texture" id=10]
@@ -13,109 +14,98 @@
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 11, 7 )
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 5.25, 3 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5, 2.5 )
 
 [node name="Game" type="Node2D"]
-position = Vector2( 0, 679 )
+position = Vector2( 27, 656 )
 
-[node name="Shader" type="Control" parent="."]
-margin_left = -24.0
-margin_top = -42.0
-margin_right = 16.0
-margin_bottom = -2.0
+[node name="GameCamera" parent="." instance=ExtResource( 2 )]
+position = Vector2( 24, 0 )
 
-[node name="EditorShader" parent="Shader" instance=ExtResource( 6 )]
+[node name="AreaFloor5" parent="." instance=ExtResource( 8 )]
+position = Vector2( -24, -42 )
 
-[node name="GreenShader" parent="Shader/EditorShader" index="0"]
-margin_left = -587.0
-margin_top = -188.0
-margin_right = 542.0
-margin_bottom = 337.0
-rect_scale = Vector2( 1.1307, 6.02379 )
+[node name="Interactable" type="Node2D" parent="AreaFloor5"]
 
-[node name="GreyShader" parent="Shader/EditorShader" index="1"]
-margin_left = -675.0
-margin_top = -90.0
-margin_right = 554.0
-margin_bottom = 276.0
-rect_scale = Vector2( 1.10714, 4.70872 )
-
-[node name="NormalShader" parent="Shader/EditorShader" index="2"]
-margin_left = -619.0
-margin_top = -193.0
-margin_right = 513.0
-margin_bottom = 173.0
-rect_scale = Vector2( 1.13544, 5.78248 )
-
-[node name="SlidyCamera" parent="Shader" instance=ExtResource( 2 )]
-
-[node name="Background" type="Sprite" parent="Shader"]
-visible = false
-position = Vector2( 120, 42 )
-texture = ExtResource( 10 )
-
-[node name="AreaFloor5" parent="Shader" instance=ExtResource( 8 )]
-
-[node name="Interactable" type="Node2D" parent="Shader/AreaFloor5"]
-
-[node name="ArrowUp" type="Area2D" parent="Shader/AreaFloor5/Interactable"]
+[node name="ArrowUp" type="Area2D" parent="AreaFloor5/Interactable"]
 position = Vector2( 316, 36 )
 
-[node name="ArrowSprite" type="Sprite" parent="Shader/AreaFloor5/Interactable/ArrowUp"]
+[node name="ArrowSprite" type="Sprite" parent="AreaFloor5/Interactable/ArrowUp"]
 scale = Vector2( 0.21875, 0.203125 )
 texture = ExtResource( 9 )
 
-[node name="ArrowCollider" type="CollisionShape2D" parent="Shader/AreaFloor5/Interactable/ArrowUp"]
+[node name="ArrowCollider" type="CollisionShape2D" parent="AreaFloor5/Interactable/ArrowUp"]
 shape = SubResource( 9 )
 
-[node name="AreaFloor6" parent="Shader" instance=ExtResource( 8 )]
-position = Vector2( 0, -168 )
+[node name="AreaFloor6" parent="." instance=ExtResource( 8 )]
+position = Vector2( -24, -210 )
 
-[node name="Interactable" type="Node2D" parent="Shader/AreaFloor6"]
+[node name="Interactable" type="Node2D" parent="AreaFloor6"]
 
-[node name="ArrowDown" type="Area2D" parent="Shader/AreaFloor6/Interactable"]
+[node name="ArrowDown" type="Area2D" parent="AreaFloor6/Interactable"]
 position = Vector2( 317, 80 )
 
-[node name="ArrowSprite" type="Sprite" parent="Shader/AreaFloor6/Interactable/ArrowDown"]
+[node name="ArrowSprite" type="Sprite" parent="AreaFloor6/Interactable/ArrowDown"]
 scale = Vector2( 0.21875, 0.203125 )
 texture = ExtResource( 9 )
 
-[node name="ArrowCollider" type="CollisionShape2D" parent="Shader/AreaFloor6/Interactable/ArrowDown"]
+[node name="ArrowCollider" type="CollisionShape2D" parent="AreaFloor6/Interactable/ArrowDown"]
 shape = SubResource( 9 )
 
-[node name="Campfire" parent="Shader" instance=ExtResource( 1 )]
-position = Vector2( 74, 48 )
+[node name="Campfire" type="StaticBody2D" parent="."]
+position = Vector2( 23, 19 )
+script = ExtResource( 5 )
 
-[node name="Twig" type="StaticBody2D" parent="Shader"]
-position = Vector2( 74, 69 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Campfire"]
+position = Vector2( 1, 2.5 )
+shape = SubResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shader/Twig"]
+[node name="CampfireSprite" type="Sprite" parent="Campfire"]
+position = Vector2( 1, 3 )
+texture = ExtResource( 6 )
+
+[node name="CampfireLight" type="Light2D" parent="Campfire"]
+position = Vector2( 1, 3 )
+texture = ExtResource( 10 )
+mode = 2
+
+[node name="Twig" parent="." instance=ExtResource( 4 )]
+position = Vector2( 39, 34 )
+
+[node name="ExampleArea" parent="." instance=ExtResource( 1 )]
 visible = false
-position = Vector2( -0.25, 0 )
-shape = SubResource( 10 )
+position = Vector2( -24, -42 )
 
-[node name="Sprite" type="Sprite" parent="Shader/Twig"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+[node name="Background" parent="ExampleArea" index="0"]
+cell_tile_origin = 2
 
-[node name="Player" parent="Shader" instance=ExtResource( 3 )]
+[node name="Foreground" parent="ExampleArea" index="4"]
+z_index = 0
+
+[node name="CollisionShape2D" parent="ExampleArea/Boundaries" index="0"]
+disabled = true
+
+[node name="CollisionShape2D2" parent="ExampleArea/Boundaries" index="1"]
+disabled = true
+
+[node name="CollisionShape2D3" parent="ExampleArea/Boundaries" index="2"]
+disabled = true
+
+[node name="CollisionShape2D4" parent="ExampleArea/Boundaries" index="3"]
+disabled = true
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
 material = null
-position = Vector2( 36, 70 )
+position = Vector2( 8, 29 )
 
-[node name="GreenShader" parent="Shader" instance=ExtResource( 7 )]
-visible = true
-margin_left = -609.0
-margin_top = -771.0
-margin_right = 520.0
-margin_bottom = -246.0
-rect_scale = Vector2( 1.1307, 6.02379 )
+[node name="Shader" parent="." instance=ExtResource( 7 )]
 
-[connection signal="body_entered" from="Shader/AreaFloor5/Interactable/ArrowUp" to="Shader/Player" method="_on_ArrowUp_body_entered"]
-[connection signal="body_entered" from="Shader/AreaFloor6/Interactable/ArrowDown" to="Shader/Player" method="_on_ArrowDown_body_entered"]
-[connection signal="move_floor" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_floor"]
-[connection signal="move_frame" from="Shader/Player" to="Shader/SlidyCamera" method="_on_Player_move_frame"]
+[connection signal="body_entered" from="AreaFloor5/Interactable/ArrowUp" to="Player" method="_on_ArrowUp_body_entered"]
+[connection signal="body_entered" from="AreaFloor6/Interactable/ArrowDown" to="Player" method="_on_ArrowDown_body_entered"]
+[connection signal="move_floor" from="Player" to="GameCamera" method="_on_Player_move_floor"]
+[connection signal="move_frame" from="Player" to="GameCamera" method="_on_Player_move_frame"]
 
-[editable path="Shader/EditorShader"]
-[editable path="Shader/AreaFloor5"]
-[editable path="Shader/AreaFloor6"]
+[editable path="AreaFloor5"]
+[editable path="AreaFloor6"]
+[editable path="ExampleArea"]

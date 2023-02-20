@@ -1,6 +1,6 @@
 extends Camera2D
 
-var newPosition = position;
+onready var newPosition = position;
 var t = 0;
 
 func _physics_process(delta):

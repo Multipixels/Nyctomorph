@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Campfire.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Campfire.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/LightBall.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/campfire.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 2.5 )
