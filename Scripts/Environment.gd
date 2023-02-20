@@ -36,7 +36,9 @@ func set_editor_lighting(new_val):
 	reflect_editor_changes()
 	
 func reflect_editor_changes():
-	if lighting_in_editor:
-		give_material(LightMaterial)
-	else:
-		give_material(GenericMaterial)
+	
+	if Engine.editor_hint:
+		if lighting_in_editor:
+			give_material(LightMaterial)
+		else:
+			give_material(GenericMaterial)

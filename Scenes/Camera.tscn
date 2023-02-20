@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/SlidyCamera.gd" type="Script" id=1]
 
-[node name="SlidyCamera" type="Camera2D"]
-position = Vector2( 24, 42 )
+[node name="GameCamera" type="Camera2D"]
 current = true
 script = ExtResource( 1 )
