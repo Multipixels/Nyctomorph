@@ -17,7 +17,7 @@ var direction = 1;
 var canMove = true;
 var canMoveTimer = 0.0;
 
-var current_sticks = 0;
+var current_twigs = 0;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -45,6 +45,14 @@ func _physics_process(_delta):
 	
 	if (motion != Vector2(0, 0) and canMove):
 		move_and_slide(motion);
+	
+	var last_collision = get_last_slide_collision();
+	if last_collision != null:
+		if Input.is_action_just_pressed("interact"):
+			
+			if last_collision.collider.name == "Twig":
+				current_twigs += 1;
+				get_last_slide_collision().collider.queue_free();
 	
 	if position.x >= 0 and (position.x / 48 - current_frame >= 1.02 or position.x / 48 - current_frame <= -0.02):
 		current_frame = int(position.x) / 48;
