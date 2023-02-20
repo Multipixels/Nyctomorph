@@ -17,6 +17,8 @@ var direction = 1;
 var canMove = true;
 var canMoveTimer = 0.0;
 
+var current_sticks = 0;
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	canMoveTimer -= delta;
