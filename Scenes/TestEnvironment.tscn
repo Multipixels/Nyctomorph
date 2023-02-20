@@ -1,20 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/ExampleArea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=5]
 
 [node name="TestEnvironment" type="Node2D"]
 
 [node name="SlidyCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 24, 42 )
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="Campfire" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 208, 69 )
+time_remaining = 30
+time_per_level = 10
+
 [node name="ExampleArea" parent="YSort" instance=ExtResource( 2 )]
 
+[node name="ExampleArea2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 0, -168 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 11, 63 )
+position = Vector2( 309, 64 )
+playerSpeed = 64
 
 [node name="Shader" parent="." instance=ExtResource( 5 )]
 
