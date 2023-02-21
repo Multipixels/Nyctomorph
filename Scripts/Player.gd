@@ -18,19 +18,19 @@ var canMove = true;
 var canMoveTimer = 0.0;
 
 var current_twigs = 0;
+var max_twigs = 3;
+var is_holding_torch = false;
+
+onready var twig_scene = load("res://Scenes/Twig.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	canMoveTimer -= delta;
 	
+	playerSpeed = 24 - 3 * current_twigs;
+	
 	if canMoveTimer <= 0:
 		canMove = true;
-		
-	if Input.is_action_just_pressed("light_toggle"):
-		if $TorchLight.is_visible():
-			$TorchLight.hide();
-		else:
-			$TorchLight.show();
 
 func _physics_process(_delta):
 	motionHorizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"));
@@ -49,10 +49,30 @@ func _physics_process(_delta):
 	var last_collision = get_last_slide_collision();
 	if last_collision != null:
 		if Input.is_action_just_pressed("interact"):
-			
-			if last_collision.collider.name == "Twig":
+			if last_collision.collider.is_in_group("Twig") and current_twigs < max_twigs:
 				current_twigs += 1;
 				get_last_slide_collision().collider.queue_free();
+	
+	if Input.is_action_just_pressed("consume"):
+		var action = false;
+		
+		if current_twigs > 0:
+			for body in $FireChecker.get_overlapping_bodies():
+				if body.is_in_group("Campfire"):
+					action = true;
+					body.add_fuel();
+					current_twigs -= 1;
+					break;
+		
+		if !action and current_twigs > 0 and $TwigChecker.get_overlapping_bodies() == []:
+			current_twigs -= 1;
+			var droppedTwig = twig_scene.instance();
+			get_parent().add_child(droppedTwig);
+			droppedTwig.global_position = Vector2(global_position.x, global_position.y+2);
+	
+	
+	
+	
 	
 	if position.x >= 0 and (position.x / 48 - current_frame >= 1.02 or position.x / 48 - current_frame <= -0.02):
 		current_frame = int(position.x) / 48;

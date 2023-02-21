@@ -86,13 +86,13 @@ z_index = 0
 [node name="CollisionShape2D" parent="ExampleArea/Boundaries" index="0"]
 disabled = true
 
-[node name="CollisionShape2D2" parent="ExampleArea/Boundaries" index="1"]
+[node name="CollisionShape2D2" parent="ExampleArea/Boundaries" index="2"]
 disabled = true
 
-[node name="CollisionShape2D3" parent="ExampleArea/Boundaries" index="2"]
+[node name="CollisionShape2D3" parent="ExampleArea/Boundaries" index="4"]
 disabled = true
 
-[node name="CollisionShape2D4" parent="ExampleArea/Boundaries" index="3"]
+[node name="CollisionShape2D4" parent="ExampleArea/Boundaries" index="5"]
 disabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]

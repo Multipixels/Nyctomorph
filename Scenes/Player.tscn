@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/LightBall.png" type="Texture" id=2]
@@ -9,6 +9,12 @@ light_mode = 2
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 1 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 5, 2 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 9.5, 12.5 )
 
 [node name="Player" type="KinematicBody2D"]
 material = SubResource( 7 )
@@ -26,3 +32,15 @@ shape = SubResource( 2 )
 texture = ExtResource( 2 )
 offset = Vector2( 10, -10 )
 mode = 2
+
+[node name="TwigChecker" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="TwigChecker"]
+position = Vector2( 0, 2 )
+shape = SubResource( 8 )
+
+[node name="FireChecker" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="FireChecker"]
+position = Vector2( 0.5, -8.5 )
+shape = SubResource( 9 )
