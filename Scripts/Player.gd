@@ -71,11 +71,11 @@ func _physics_process(_delta):
 	else:
 		idle_animate()
 		
-	if motion.x < 0:
+	if motion.x < 0 and canMove:
 		sprite.flip_h = true
 		torchLight.scale.x = -1
 		placeChecker.position.x = -12
-	elif motion.x > 0:
+	elif motion.x > 0 and canMove:
 		sprite.flip_h = false
 		torchLight.scale.x = 1
 		placeChecker.position.x = 12
