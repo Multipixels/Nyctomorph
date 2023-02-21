@@ -10,6 +10,7 @@
 
 [node name="SlidyCamera" parent="." instance=ExtResource( 3 )]
 position = Vector2( 24, 42 )
+smoothing_speed = 7.5
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -24,8 +25,8 @@ time_per_level = 10
 position = Vector2( 0, -168 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 309, 64 )
-playerSpeed = 64
+position = Vector2( 303, 62 )
+playerSpeed = 15
 
 [node name="Shader" parent="." instance=ExtResource( 5 )]
 

@@ -4,7 +4,7 @@ signal move_frame(frame);
 signal move_floor(flooor);
 
 var current_frame = 0;
-var current_floor = 5;
+var current_floor = 0;
 
 var motionHorizontal = 0;
 var motionVertical = 0;
@@ -65,6 +65,21 @@ func _physics_process(_delta):
 		current_frame = int(position.x) / 48 - 1;
 		canMove = false;
 		emit_signal("move_frame", current_frame);
+		position.x = round(position.x);
+		position.y = round(position.y);
+		canMoveTimer = 0.75
+		
+	if position.y >= 0 and (position.y / 168 - current_floor >= 1.02 or position.y / 168 - current_floor <= -0.02):
+		current_floor = int(position.y) / 168;
+		canMove = false;
+		emit_signal("move_floor", current_floor);
+		position.x = round(position.x);
+		position.y = round(position.y);
+		canMoveTimer = 0.75
+	elif position.y < 0 and (position.y / 168 - 1 - current_floor >= 0.02 or position.y / 168 - 1- current_floor <= -1.02):
+		current_floor = int(position.y) / 168 - 1;
+		canMove = false;
+		emit_signal("move_floor", current_floor);
 		position.x = round(position.x);
 		position.y = round(position.y);
 		canMoveTimer = 0.75
