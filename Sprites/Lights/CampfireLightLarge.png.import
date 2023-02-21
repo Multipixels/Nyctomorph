@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player.png-0662117005c6b9039deb63a286c8efe4.stex"
+path="res://.import/CampfireLightLarge.png-175f6874c89ea658878d4b5e18a0cea8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player.png"
-dest_files=[ "res://.import/Player.png-0662117005c6b9039deb63a286c8efe4.stex" ]
+source_file="res://Sprites/Lights/CampfireLightLarge.png"
+dest_files=[ "res://.import/CampfireLightLarge.png-175f6874c89ea658878d4b5e18a0cea8.stex" ]
 
 [params]
 

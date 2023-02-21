@@ -17,8 +17,6 @@ smoothing_speed = 7.0
 
 [node name="Campfire" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 208, 69 )
-time_remaining = 30
-time_per_level = 10
 
 [node name="Twig" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 328, 56 )
@@ -38,7 +36,7 @@ position = Vector2( 400, 56 )
 position = Vector2( 0, -168 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 303, 62 )
+position = Vector2( 303, 63 )
 
 [node name="Shader" parent="." instance=ExtResource( 5 )]
 

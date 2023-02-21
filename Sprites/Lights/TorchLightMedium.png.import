@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player.png-0662117005c6b9039deb63a286c8efe4.stex"
+path="res://.import/TorchLightMedium.png-7984abc002a72cd71bb42a3c7ea56708.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player.png"
-dest_files=[ "res://.import/Player.png-0662117005c6b9039deb63a286c8efe4.stex" ]
+source_file="res://Sprites/Lights/TorchLightMedium.png"
+dest_files=[ "res://.import/TorchLightMedium.png-7984abc002a72cd71bb42a3c7ea56708.stex" ]
 
 [params]
 

@@ -3,13 +3,17 @@ extends KinematicBody2D
 signal move_frame(frame);
 signal move_floor(flooor);
 
+onready var animation_player = $AnimationPlayer
+onready var sprite = $MainSprite
+onready var torchLight = $TorchLight
+onready var placeChecker = $PlaceChecker
+
 var current_frame = 0;
 var current_floor = 0;
 
 var motionHorizontal = 0;
 var motionVertical = 0;
 var motion = Vector2(0, 0);
-var previousMotion = Vector2(0, 0);
 
 export var playerSpeed = 25;
 var direction = 1;
@@ -25,51 +29,77 @@ var torch_time_remaining = 150;
 onready var twig_scene = load("res://Scenes/Twig.tscn")
 onready var campfire_scene = load("res://Scenes/Campfire.tscn")
 
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	canMoveTimer -= delta;
 	torch_time_remaining -= delta;
 	
 	playerSpeed = 24 - 3 * current_twigs;
+	animation_player.playback_speed = (24 / playerSpeed) * 1.1
 	
 	if canMoveTimer <= 0:
 		canMove = true;
 		
 	if torch_time_remaining > 0:
-		$TorchLight.show();
+		torchLight.enabled = true;
+		max_twigs = 1
 	else:
-		$TorchLight.hide();
+		torchLight.enabled = false;
+		max_twigs = 3
 
 func _physics_process(_delta):
+	
 	motionHorizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"));
 	motionVertical = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"));
 	
-	previousMotion = motion;
 	motion = Vector2(motionHorizontal, motionVertical).normalized()*playerSpeed;
 	
-	if (motion != previousMotion):
-		position.x = round(position.x);
-		position.y = round(position.y);
-	
-	if (motion != Vector2(0, 0) and canMove):
-		move_and_slide(motion);
+	if (motion.distance_to(Vector2.ZERO) > sqrt(2) and canMove):
+		
+		var movement_velocity = move_and_slide(motion);
+		sprite.global_position = (global_position.round() + Vector2(0, -15))
+		torchLight.global_position = (global_position/2).round() * 2
+		
+		if movement_velocity.distance_to(Vector2.ZERO) > 0.01 :
+			walk_animate(motion)
+			
+		else:
+			idle_animate()
+		
+	else:
+		idle_animate()
+		
+	if motion.x < 0:
+		sprite.flip_h = true
+		torchLight.scale.x = -1
+		placeChecker.position.x = -12
+	elif motion.x > 0:
+		sprite.flip_h = false
+		torchLight.scale.x = 1
+		placeChecker.position.x = 12
 	
 	var last_collision = get_last_slide_collision();
 	
 	######################################################################################
 	
+	var items = placeChecker.get_overlapping_bodies()
+	
 	if Input.is_action_just_pressed("interact"):
+
 		var action = true;
 		
-		if last_collision != null:
-			if last_collision.collider.is_in_group("Twig") and current_twigs < max_twigs:
+		for each in items:
+			if each.is_in_group("Twig") and current_twigs < max_twigs:
 				action = false;
 				current_twigs += 1;
-				get_last_slide_collision().collider.queue_free();
+				each.queue_free();
+				break;
 				
 		if action and current_twigs > 0:
-			for body in $FireChecker.get_overlapping_bodies():
-				if body.is_in_group("Campfire"):
+			for body in items:
+				if body.is_in_group("Campfire") and current_twigs < max_twigs:
 					torch_time_remaining = 150;
 					current_twigs -= 1;
 					break;
@@ -78,26 +108,58 @@ func _physics_process(_delta):
 		var action = true;
 		
 		if current_twigs > 0:
-			for body in $FireChecker.get_overlapping_bodies():
+			for body in items:
 				if body.is_in_group("Campfire"):
 					action = false;
-					body.add_fuel();
+					body.add_fuel(1);
 					current_twigs -= 1;
 					break;
 		
-		if action and current_twigs > 0 and $TwigChecker.get_overlapping_bodies() == []:
-			action = false;
-			current_twigs -= 1;
-			var droppedTwig = twig_scene.instance();
-			get_parent().add_child(droppedTwig);
-			droppedTwig.global_position = Vector2(global_position.x, global_position.y+2);
+		if action and current_twigs > 0:
+			
+			var able = true
+				
+			for item in items:
+				if not item.is_in_group("Twig"):
+					able = false	
+			
+			if able:
+				action = false;
+				current_twigs -= 1;
+				var droppedTwig = twig_scene.instance();
+				get_parent().add_child(droppedTwig);
+				
+				var rng = RandomNumberGenerator.new()
+				rng.randomize()
+				var offset = Vector2(rng.randi_range(-1, 1), rng.randi_range(-1, 1))
+				
+				droppedTwig.global_position = (placeChecker.global_position + offset).round();
 	
-		if action and torch_time_remaining > 0 and current_twigs == 0 and $PlaceFireChecker.get_overlapping_bodies() == []:
-			var droppedCampfire = campfire_scene.instance();
-			get_parent().add_child(droppedCampfire);
-			droppedCampfire.global_position = Vector2(global_position.x, global_position.y+2);
-			droppedCampfire.time_remaining = droppedCampfire.time_per_level*3;
-			torch_time_remaining = 0;
+		if action and torch_time_remaining > 0 and current_twigs == 0:
+			var available = true
+			var campfire = null
+			
+			for item in items:
+				if not item.is_in_group("Twig"):
+					available = false
+				if item.is_in_group("Campfire"):
+					campfire = item
+				
+			if available:	
+				
+				for item in items:
+					item.queue_free()
+				
+				var droppedCampfire = campfire_scene.instance();
+				get_parent().add_child(droppedCampfire);
+				droppedCampfire.global_position = placeChecker.global_position.round();
+				droppedCampfire.time_remaining = droppedCampfire.time_per_level*(len(items) + 1);
+				torch_time_remaining = 0;
+				
+			elif campfire != null:
+				
+				campfire.add_fuel(torch_time_remaining/150)
+				torch_time_remaining = 0
 	
 	######################################################################################
 
@@ -130,6 +192,32 @@ func _physics_process(_delta):
 		position.x = round(position.x);
 		position.y = round(position.y);
 		canMoveTimer = 0.75
+
+
+func walk_animate(vec):
+	
+	var burden_level = current_twigs
+	if torch_time_remaining > 0:
+		burden_level += 1
+	
+	match burden_level:
+		0: animation_player.play("walk")
+		1: animation_player.play("walk1Stick")
+		2: animation_player.play("walk2Stick")
+		3: animation_player.play("walk3Stick")
+		
+
+func idle_animate():
+	
+	var burden_level = current_twigs
+	if torch_time_remaining > 0:
+		burden_level += 1
+	
+	match burden_level:
+		0: animation_player.play("idle")
+		1: animation_player.play("idle1Stick")
+		2: animation_player.play("idle2Stick")
+		3: animation_player.play("idle3Stick")
 
 
 func _on_ArrowUp_body_entered(body):
