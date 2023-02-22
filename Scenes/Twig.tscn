@@ -6,12 +6,11 @@
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 5.25, 3 )
 
-[node name="Twig" type="StaticBody2D" groups=["Twig"]]
+[node name="Twig" type="Area2D" groups=["Twig"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.25, 0 )
 shape = SubResource( 10 )
+one_way_collision_margin = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )

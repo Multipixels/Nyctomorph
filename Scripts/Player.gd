@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
-signal move_frame(frame);
-signal move_floor(flooor);
-
 onready var animation_player = $AnimationPlayer
 onready var sprite = $MainSprite
 onready var torchLight = $TorchLight
 onready var placeChecker = $PlaceChecker
+
+signal move_floor(flooor);
 
 var current_frame = 0;
 var current_floor = 0;
@@ -60,7 +59,7 @@ func _physics_process(_delta):
 		
 		var movement_velocity = move_and_slide(motion);
 		sprite.global_position = (global_position.round() + Vector2(0, -15))
-		torchLight.global_position = (global_position/2).round() * 2
+		torchLight.global_position = global_position.round()
 		
 		if movement_velocity.distance_to(Vector2.ZERO) > 0.01 :
 			walk_animate(motion)
@@ -84,7 +83,9 @@ func _physics_process(_delta):
 	
 	######################################################################################
 	
-	var items = placeChecker.get_overlapping_bodies()
+	var bodies = placeChecker.get_overlapping_bodies();
+	var areas = placeChecker.get_overlapping_areas();
+	var items = bodies + areas;
 	
 	if Input.is_action_just_pressed("interact"):
 
@@ -165,18 +166,8 @@ func _physics_process(_delta):
 
 	if position.x >= 0 and (position.x / 48 - current_frame >= 1.02 or position.x / 48 - current_frame <= -0.02):
 		current_frame = int(position.x) / 48;
-		canMove = false;
-		emit_signal("move_frame", current_frame);
-		position.x = round(position.x);
-		position.y = round(position.y);
-		canMoveTimer = 0.75
 	elif position.x < 0 and (position.x / 48 - 1 - current_frame >= 0.02 or position.x / 48 - 1 - current_frame <= -1.02):
 		current_frame = int(position.x) / 48 - 1;
-		canMove = false;
-		emit_signal("move_frame", current_frame);
-		position.x = round(position.x);
-		position.y = round(position.y);
-		canMoveTimer = 0.75
 		
 	if position.y >= 0 and (position.y / 168 - current_floor >= 1.02 or position.y / 168 - current_floor <= -0.02):
 		current_floor = int(position.y) / 168;
