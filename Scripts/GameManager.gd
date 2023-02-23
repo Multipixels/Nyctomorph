@@ -14,7 +14,7 @@ func _process(delta):
 	time_ui_sprite.set_frame(int(time_passed) / 60);
 	
 	if time_passed > win_time:
-		pass #win game
+		get_tree().change_scene("res://Scenes/WinMenu.tscn")
 		
 
 func _on_Monster_caught_player():
