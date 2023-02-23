@@ -127,7 +127,7 @@ func monster_action():
 		if campfires != []:
 			direction = move_towards(distance_from_campfires[0]);
 		else:
-			direction = move_towards(player);
+			direction = move_towards(distance_from_player);
 		current_frame += direction.x;
 		current_floor += direction.y;
 		print("none");
@@ -164,6 +164,6 @@ func move_towards(difference: Vector2):
 		return Vector2(1, 0);
 		
 	if difference.y > 0:
-		return Vector2(0, 1);
-	return Vector2(0, -1);
+		return Vector2(0, -1);
+	return Vector2(0, 1);
 
