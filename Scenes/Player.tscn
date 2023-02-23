@@ -148,11 +148,12 @@ tracks/0/keys = {
 "values": [ 60, 61, 62, 63, 64, 65, 66, 67, 68, 69 ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="LessSlidyCamera" type="Camera2D" parent="."]
+position = Vector2( 0, -24 )
 current = true
 smoothing_speed = 8.0
 script = ExtResource( 6 )

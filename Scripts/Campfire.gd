@@ -4,6 +4,9 @@ export var light_level = 3;
 export var time_remaining = 380;
 export var time_per_level = 100;
 
+var current_floor = 0;
+var current_frame = 0;
+
 var light_materials;
 var light_mat3 = preload("res://Sprites/Lights/CampfireLightLarge.png")
 var light_mat2 = preload("res://Sprites/Lights/CampfireLightMed.png")
@@ -11,6 +14,20 @@ var light_mat1 = preload("res://Sprites/Lights/CampfireLightSmall.png")
 
 func _ready():
 	light_materials = [light_mat1, light_mat2, light_mat3];
+	update_info();
+	
+	
+
+func update_info():
+	if position.x >= 0:
+		current_frame = int(position.x) / 48;
+	elif position.x < 0:
+		current_frame = int(position.x) / 48 - 1;
+		
+	if position.y >= 0:
+		current_floor = int(position.y) / 168;
+	elif global_position.y < 0:
+		current_floor = int(position.y) / 168 - 1;
 
 func _process(delta):
 	time_remaining -= delta;

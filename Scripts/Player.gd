@@ -155,6 +155,7 @@ func _physics_process(_delta):
 				get_parent().add_child(droppedCampfire);
 				droppedCampfire.global_position = placeChecker.global_position.round();
 				droppedCampfire.time_remaining = droppedCampfire.time_per_level*(len(items) + 1);
+				droppedCampfire.update_info();
 				torch_time_remaining = 0;
 				
 			elif campfire != null:
