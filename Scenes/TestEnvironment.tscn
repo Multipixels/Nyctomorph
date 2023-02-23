@@ -41,7 +41,6 @@ position = Vector2( 303, 63 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 184, 40 )
-current = true
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource( 7 )

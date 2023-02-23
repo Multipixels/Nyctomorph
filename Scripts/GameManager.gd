@@ -4,7 +4,7 @@ var time_passed = 0;
 var win_time = 360;
 
 func _ready():
-	pass # Replace with function body.
+	Engine.time_scale = 2;
 
 func _process(delta):
 	time_passed += delta;
@@ -15,5 +15,5 @@ func _process(delta):
 
 func _on_Monster_caught_player():
 	print("game lost: reset scene")
-	get_tree().change_scene("res://Scenes/TestEnvironment.tscn")
+	get_tree().change_scene("res://Scenes/DeadMenu.tscn")
 	pass #lose game

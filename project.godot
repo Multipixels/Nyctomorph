@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Nokia"
-run/main_scene="res://Scenes/TestEnvironment.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/icon="res://Sprites/icon.png"
 
@@ -22,8 +22,8 @@ gdscript/warnings/integer_division=false
 
 [display]
 
-window/size/width=480
-window/size/height=840
+window/size/width=48
+window/size/height=84
 window/size/test_width=480
 window/size/test_height=840
 window/handheld/orientation="portrait"

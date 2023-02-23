@@ -36,7 +36,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("light_toggle"):
 		action_timer = 0;
 	
-	#action_timer -= delta
+	action_timer -= delta
 	wondering_switch_timer -= delta
 	
 	if action_timer <= 0:
