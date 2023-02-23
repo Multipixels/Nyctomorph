@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/ExampleArea.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Twig.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=7]
 
 [node name="TestEnvironment" type="Node2D"]
 
@@ -26,10 +27,10 @@ position = Vector2( 376, 56 )
 [node name="Twig4" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 400, 56 )
 
-[node name="ExampleArea" parent="YSort" instance=ExtResource( 2 )]
-
-[node name="ExampleArea2" parent="YSort" instance=ExtResource( 2 )]
+[node name="Floor-1" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 0, -168 )
+
+[node name="Floor0" parent="YSort" instance=ExtResource( 2 )]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 303, 63 )
@@ -41,3 +42,8 @@ position = Vector2( 303, 63 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 184, 40 )
 current = true
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[connection signal="caught_player" from="YSort/Monster" to="GameManager" method="_on_Monster_caught_player"]
