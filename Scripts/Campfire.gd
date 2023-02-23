@@ -41,6 +41,9 @@ func _process(delta):
 			light_level = int(time_remaining+time_per_level) / time_per_level;
 		
 		switch_texture();
+		
+	if light_level == 0:
+		queue_free();
 
 func add_fuel(units):
 	if time_remaining < 0:

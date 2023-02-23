@@ -3,11 +3,15 @@ extends Node2D
 var time_passed = 0;
 var win_time = 360;
 
+onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
+
 func _ready():
-	Engine.time_scale = 2;
+	Engine.time_scale = 1;
 
 func _process(delta):
 	time_passed += delta;
+	
+	time_ui_sprite.set_frame(int(time_passed) / 60);
 	
 	if time_passed > win_time:
 		pass #win game

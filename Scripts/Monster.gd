@@ -86,11 +86,12 @@ func monster_action():
 	if campfires == [] and player_torch == false:
 		current_frame = player.current_frame;
 		current_floor = player.current_floor;
+		action_complete = true;
 		print("no light in world");
 	
 	
 	#if monster is within 4x4 of player...
-	if abs(distance_from_player.x) <= 3 and abs(distance_from_player.y) <= 3:
+	if action_complete != true and abs(distance_from_player.x) <= 3 and abs(distance_from_player.y) <= 3:
 		action_complete = true;
 		var direction;
 		print("monster within 4x4 of player:");
