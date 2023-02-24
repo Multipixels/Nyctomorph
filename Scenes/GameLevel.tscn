@@ -12,7 +12,7 @@
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 24, 64 )
+position = Vector2( 12, 64 )
 
 [node name="Monster" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( -672, 0 )

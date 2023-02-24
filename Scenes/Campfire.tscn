@@ -11,6 +11,8 @@ extents = Vector2( 5, 2.5 )
 [node name="Campfire" type="StaticBody2D" groups=["Campfire"]]
 material = ExtResource( 4 )
 script = ExtResource( 1 )
+time_remaining = 50
+time_per_level = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
