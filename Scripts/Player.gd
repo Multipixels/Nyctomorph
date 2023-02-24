@@ -87,9 +87,9 @@ func _physics_process(_delta):
 	var playerAreas = entranceChecker.get_overlapping_areas();
 	
 	for item in playerAreas:
-		if item.is_in_group("Top"):
+		if item.is_in_group("Top") and motion.y < 0:
 			global_position += Vector2(item.send_to.x * 48, -item.send_to.y * (2*84) + 54)
-		elif item.is_in_group("Bot"):
+		elif item.is_in_group("Bot") and motion.y > 0:
 			global_position += Vector2(item.send_to.x * 48, item.send_to.y * (2*84) - 54)
 		
 	

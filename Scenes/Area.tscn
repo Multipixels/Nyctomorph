@@ -360,6 +360,7 @@ cell_size = Vector2( 1, 1 )
 cell_quadrant_size = 48
 cell_tile_origin = 2
 cell_y_sort = true
+show_collision = true
 format = 1
 
 [node name="Trees" type="TileMap" parent="."]
@@ -379,6 +380,7 @@ cell_size = Vector2( 1, 1 )
 cell_quadrant_size = 84
 cell_tile_origin = 2
 cell_y_sort = true
+show_collision = true
 format = 1
 
 [node name="Foreground" type="TileMap" parent="."]
