@@ -11,7 +11,6 @@
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Lights/LightBall.png" type="Texture" id=10]
 
-
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 11, 7 )
 
@@ -23,6 +22,7 @@ position = Vector2( 27, 656 )
 
 [node name="GameCamera" parent="." instance=ExtResource( 2 )]
 position = Vector2( 24, 0 )
+current = false
 
 [node name="AreaFloor5" parent="." instance=ExtResource( 8 )]
 position = Vector2( -24, -42 )
@@ -97,7 +97,6 @@ disabled = true
 disabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-material = null
 position = Vector2( 8, 29 )
 
 [node name="Shader" parent="." instance=ExtResource( 7 )]
@@ -105,7 +104,6 @@ position = Vector2( 8, 29 )
 [connection signal="body_entered" from="AreaFloor5/Interactable/ArrowUp" to="Player" method="_on_ArrowUp_body_entered"]
 [connection signal="body_entered" from="AreaFloor6/Interactable/ArrowDown" to="Player" method="_on_ArrowDown_body_entered"]
 [connection signal="move_floor" from="Player" to="GameCamera" method="_on_Player_move_floor"]
-[connection signal="move_frame" from="Player" to="GameCamera" method="_on_Player_move_frame"]
 
 [editable path="AreaFloor5"]
 [editable path="AreaFloor6"]

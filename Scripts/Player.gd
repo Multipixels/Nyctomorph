@@ -4,6 +4,7 @@ onready var animation_player = $AnimationPlayer
 onready var sprite = $MainSprite
 onready var torchLight = $TorchLight
 onready var placeChecker = $PlaceChecker
+onready var entranceChecker = $EntranceChecker
 
 signal move_floor(flooor);
 
@@ -80,6 +81,17 @@ func _physics_process(_delta):
 		placeChecker.position.x = 12
 	
 	var last_collision = get_last_slide_collision();
+	
+	######################################################################################
+	
+	var playerAreas = entranceChecker.get_overlapping_areas();
+	
+	for item in playerAreas:
+		if item.is_in_group("Top"):
+			global_position += Vector2(item.send_to.x * 48, -item.send_to.y * (2*84) + 54)
+		elif item.is_in_group("Bot"):
+			global_position += Vector2(item.send_to.x * 48, item.send_to.y * (2*84) - 54)
+		
 	
 	######################################################################################
 	

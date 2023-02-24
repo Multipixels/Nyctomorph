@@ -1,0 +1,174 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/EntranceBot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/EntranceTop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Area.tscn" type="PackedScene" id=4]
+
+[node name="AllFloors" type="YSort"]
+
+[node name="Floor-5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -840 )
+
+[node name="Foreground" parent="Floor-5" index="4"]
+tile_data = PoolIntArray( 1376351, 536870912, 1, 1572759, 0, 1, 1507422, 536870912, 1, 1638295, 0, 1, 1572958, 536870912, 1, 1703827, 0, 4, 1703828, 0, 4, 1703829, 0, 4, 1703830, 0, 4, 1703831, 0, 4, 1703832, 0, 4, 1703833, 0, 4, 1703837, 0, 1, 1638487, 536870912, 1, 1638495, 536870912, 1, 1638497, 536870912, 2, 1638499, 536870912, 2, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2 )
+
+[node name="Floor-4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -672 )
+
+[node name="Foreground" parent="Floor-4" index="4"]
+tile_data = PoolIntArray( 1703825, 0, 4, 1703826, 0, 4, 1703827, 0, 4, 1703828, 0, 4, 1703829, 0, 2, 1703834, 0, 1, 1638486, 536870912, 5, 1638496, 536870912, 0, 1638499, 536870912, 2, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2 )
+
+[node name="Floor-3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -504 )
+
+[node name="Foreground" parent="Floor-3" index="4"]
+tile_data = PoolIntArray( 1703821, 0, 4, 1703822, 0, 4, 1703823, 0, 4, 1703824, 0, 4, 1703825, 0, 4, 1703826, 0, 4, 1703827, 0, 4, 1703828, 0, 4, 1703829, 0, 4, 1703831, 0, 0, 1638486, 536870912, 7, 1638496, 536870912, 4, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2, 1638507, 536870912, 2 )
+
+[node name="Floor-2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -336 )
+
+[node name="Foreground" parent="Floor-2" index="4"]
+tile_data = PoolIntArray( 1572954, 536870912, 1, 1572955, 536870912, 1, 1572956, 536870912, 1, 1572957, 536870912, 1, 1703821, 0, 4, 1703822, 0, 4, 1703823, 0, 4, 1703824, 0, 4, 1703825, 0, 4, 1703826, 0, 4, 1703827, 0, 4, 1703828, 0, 4, 1703829, 0, 4, 1703830, 0, 4, 1638484, 536870912, 1, 1638493, 536870912, 1, 1638494, 536870912, 1, 1638497, 536870912, 2, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2, 1638507, 536870912, 2, 1638508, 536870912, 2 )
+
+[node name="Floor-1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -168 )
+
+[node name="Foreground" parent="Floor-1" index="4"]
+tile_data = PoolIntArray( 1638282, 536870912, 4, 1638283, 536870912, 4, 1638284, 536870912, 4, 1638285, 536870912, 4, 1638286, 536870912, 4, 1638288, 536870912, 4, 1638289, 536870912, 4, 1638291, 0, 2, 1638292, 0, 2, 1638293, 0, 2, 1638294, 0, 2, 1703822, 536870912, 4, 1703823, 536870912, 4, 1703824, 536870912, 4, 1703825, 536870912, 4, 1703831, 0, 1, 1703837, 536870912, 5, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2, 1638507, 536870912, 2, 1638508, 536870912, 2, 1704032, 536870912, 0, 1704036, 536870912, 2 )
+
+[node name="EntranceBot" parent="Floor-1" instance=ExtResource( 1 )]
+position = Vector2( 25, 84 )
+
+[node name="EntranceBot2" parent="Floor-1" instance=ExtResource( 1 )]
+position = Vector2( -182, 84 )
+
+[node name="EntranceBot3" parent="Floor-1" instance=ExtResource( 1 )]
+position = Vector2( 274, 84 )
+
+[node name="Floor0" parent="." instance=ExtResource( 4 )]
+
+[node name="Foreground" parent="Floor0" index="4"]
+tile_data = PoolIntArray( 1507229, 536870912, 1, 1572961, 0, 2, 1572964, 0, 2, 1572965, 0, 2, 1703820, 0, 4, 1703821, 0, 4, 1703822, 0, 4, 1703823, 0, 4, 1703824, 0, 4, 1703825, 0, 4, 1703828, 536870912, 2, 1703829, 536870912, 2, 1703830, 536870912, 2, 1703831, 536870912, 2, 1703832, 536870912, 2, 1703833, 536870912, 2, 1703834, 536870912, 2, 1703836, 536870912, 1, 1703847, 0, 1, 1638482, 0, 5, 1638496, 0, 5, 1638501, 0, 2, 1638502, 0, 2, 1638503, 0, 2, 1638504, 0, 2, 1638505, 0, 2, 1638506, 0, 2 )
+
+[node name="EntranceTop" parent="Floor0" instance=ExtResource( 3 )]
+position = Vector2( 25, 20 )
+
+[node name="EntranceBot" parent="Floor0" instance=ExtResource( 1 )]
+position = Vector2( 25, 84 )
+
+[node name="EntranceTop2" parent="Floor0" instance=ExtResource( 3 )]
+position = Vector2( -182, 20 )
+
+[node name="EntranceBot2" parent="Floor0" instance=ExtResource( 1 )]
+position = Vector2( -182, 84 )
+
+[node name="EntranceTop3" parent="Floor0" instance=ExtResource( 3 )]
+position = Vector2( 274, 20 )
+
+[node name="EntranceBot3" parent="Floor0" instance=ExtResource( 1 )]
+position = Vector2( 274, 84 )
+
+[node name="Floor1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 168 )
+
+[node name="Foreground" parent="Floor1" index="4"]
+tile_data = PoolIntArray( 1638284, 536870912, 4, 1638285, 536870912, 4, 1638286, 536870912, 4, 1638287, 536870912, 4, 1638288, 536870912, 4, 1638289, 536870912, 4, 1638290, 536870912, 4, 1638291, 536870912, 4, 1638292, 536870912, 4, 1638296, 0, 0, 1703827, 0, 5, 1638488, 0, 1, 1638497, 0, 3, 1638500, 0, 4, 1638501, 536870912, 2, 1638504, 0, 4, 1638505, 0, 4, 1638506, 0, 4, 1638507, 0, 4, 1638508, 0, 4 )
+
+[node name="EntranceTop" parent="Floor1" instance=ExtResource( 3 )]
+position = Vector2( 24, 20 )
+
+[node name="EntranceTop2" parent="Floor1" instance=ExtResource( 3 )]
+position = Vector2( -182, 20 )
+
+[node name="EntranceTop3" parent="Floor1" instance=ExtResource( 3 )]
+position = Vector2( 274, 20 )
+
+[node name="EntranceBot" parent="Floor1" instance=ExtResource( 1 )]
+position = Vector2( 166, 84 )
+
+[node name="EntranceBot2" parent="Floor1" instance=ExtResource( 1 )]
+position = Vector2( -264, 84 )
+
+[node name="Floor2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 336 )
+
+[node name="Foreground" parent="Floor2" index="4"]
+tile_data = PoolIntArray( 1703822, 536870912, 4, 1703823, 536870912, 4, 1703824, 536870912, 4, 1703825, 536870912, 4, 1703826, 536870912, 4, 1703827, 536870912, 4, 1703828, 536870912, 4, 1703830, 0, 3, 1703833, 0, 1, 1638497, 536870912, 0, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2, 1638507, 536870912, 2, 1638508, 536870912, 2, 1638509, 536870912, 2 )
+
+[node name="EntranceTop" parent="Floor2" instance=ExtResource( 3 )]
+position = Vector2( -264, 20 )
+
+[node name="EntranceTop2" parent="Floor2" instance=ExtResource( 3 )]
+position = Vector2( 166, 20 )
+
+[node name="EntranceBot" parent="Floor2" instance=ExtResource( 1 )]
+position = Vector2( -97, 84 )
+
+[node name="EntranceBot2" parent="Floor2" instance=ExtResource( 1 )]
+position = Vector2( 257, 84 )
+
+[node name="Floor3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 504 )
+
+[node name="Foreground" parent="Floor3" index="4"]
+tile_data = PoolIntArray( 1703822, 0, 4, 1703823, 0, 4, 1703824, 0, 4, 1703825, 0, 4, 1703826, 0, 4, 1703827, 0, 4, 1703828, 0, 4, 1703830, 0, 4, 1703834, 0, 9, 1703841, 536870912, 6, 1638488, 536870912, 8, 1638495, 536870912, 1, 1638498, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2, 1638507, 536870912, 2, 1638508, 536870912, 2, 1638509, 536870912, 2, 1638510, 536870912, 2 )
+
+[node name="EntranceTop" parent="Floor3" instance=ExtResource( 3 )]
+position = Vector2( -97, 20 )
+
+[node name="EntranceTop2" parent="Floor3" instance=ExtResource( 3 )]
+position = Vector2( 257, 22 )
+
+[node name="EntranceBot" parent="Floor3" instance=ExtResource( 1 )]
+position = Vector2( 80, 84 )
+
+[node name="EntranceBot2" parent="Floor3" instance=ExtResource( 1 )]
+position = Vector2( -19, 83 )
+
+[node name="EntranceBot3" parent="Floor3" instance=ExtResource( 1 )]
+position = Vector2( -275, 83 )
+
+[node name="Floor4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 672 )
+
+[node name="Foreground" parent="Floor4" index="4"]
+tile_data = PoolIntArray( 1703823, 0, 2, 1703824, 0, 2, 1703825, 0, 2, 1703826, 0, 2, 1703827, 0, 2, 1703828, 0, 2, 1703829, 0, 2, 1703830, 0, 2, 1703831, 0, 2, 1703832, 0, 2, 1703843, 0, 5, 1638487, 0, 6, 1638494, 536870912, 7, 1638496, 536870912, 4, 1638499, 536870912, 2, 1638500, 536870912, 2, 1638501, 536870912, 2, 1638502, 536870912, 2, 1638503, 536870912, 2, 1638504, 536870912, 2, 1638505, 536870912, 2, 1638506, 536870912, 2 )
+
+[node name="EntranceTop" parent="Floor4" instance=ExtResource( 3 )]
+position = Vector2( -275, 20 )
+
+[node name="EntranceTop2" parent="Floor4" instance=ExtResource( 3 )]
+position = Vector2( -19, 20 )
+
+[node name="EntranceTop3" parent="Floor4" instance=ExtResource( 3 )]
+position = Vector2( 80, 20 )
+
+[node name="EntranceBot" parent="Floor4" instance=ExtResource( 1 )]
+position = Vector2( 228, 84 )
+
+[node name="EntranceBot2" parent="Floor4" instance=ExtResource( 1 )]
+position = Vector2( -149, 84 )
+
+[node name="Floor5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 840 )
+
+[node name="Foreground" parent="Floor5" index="4"]
+tile_data = PoolIntArray( 1572959, 0, 0, 1572961, 0, 2, 1703822, 0, 4, 1703823, 0, 4, 1703824, 0, 4, 1703825, 0, 4, 1703826, 0, 4, 1703827, 0, 4, 1703828, 0, 4, 1703829, 0, 4, 1703830, 0, 4, 1703832, 0, 0, 1638500, 0, 2, 1638501, 0, 2, 1638502, 0, 2, 1638503, 0, 2, 1638504, 0, 2, 1638505, 0, 2, 1835106, 0, 2, 1900643, 0, 2, 2162781, 0, 2, 2162784, 0, 2, 2162785, 0, 2 )
+
+[node name="EntranceTop" parent="Floor5" instance=ExtResource( 3 )]
+position = Vector2( -149, 20 )
+
+[node name="EntranceTop2" parent="Floor5" instance=ExtResource( 3 )]
+position = Vector2( 228, 21 )
+
+[editable path="Floor-5"]
+[editable path="Floor-4"]
+[editable path="Floor-3"]
+[editable path="Floor-2"]
+[editable path="Floor-1"]
+[editable path="Floor0"]
+[editable path="Floor1"]
+[editable path="Floor2"]
+[editable path="Floor3"]
+[editable path="Floor4"]
+[editable path="Floor5"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Entrance.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 4 )
+
+[node name="EntranceTop" type="Area2D" groups=["Top"]]
+script = ExtResource( 1 )
+send_to = Vector2( 0, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Top"]]
+shape = SubResource( 1 )
