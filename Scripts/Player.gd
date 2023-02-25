@@ -88,9 +88,17 @@ func _physics_process(_delta):
 	
 	for item in playerAreas:
 		if item.is_in_group("Top") and motion.y < 0:
-			global_position += Vector2(item.send_to.x * 48, -item.send_to.y * (2*84) + 54)
+			current_floor -= 1;
+			canMove = false;
+			emit_signal("move_floor", current_floor);
+			canMoveTimer = 1;
+			position.y += -114;
 		elif item.is_in_group("Bot") and motion.y > 0:
-			global_position += Vector2(item.send_to.x * 48, item.send_to.y * (2*84) - 54)
+			current_floor += 1;
+			canMove = false;
+			emit_signal("move_floor", current_floor);
+			canMoveTimer = 1;
+			position.y += 114;
 		
 	
 	######################################################################################
@@ -231,12 +239,3 @@ func _on_ArrowUp_body_entered(body):
 	canMoveTimer = 1;
 	
 	position.y -= 148;
-
-
-func _on_ArrowDown_body_entered(body):
-	current_floor -= 1;
-	canMove = false;
-	emit_signal("move_floor", current_floor);
-	canMoveTimer = 1;
-	
-	position.y += 148;
