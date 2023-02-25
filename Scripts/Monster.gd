@@ -53,14 +53,17 @@ func _process(delta):
 		#print("game over, monster is in same frame as player.")
 		
 func monster_action():
-	var enrage = false;
+	var new_floor;
+	var new_frame;
+	
+	var enrage;
+	
 	var campfires = get_tree().get_nodes_in_group("Campfire");
 	var player_torch = false;
 	
-	
 	if player.torch_time_remaining > 0:
-		player_torch = true;
-		
+			player_torch = true;
+	
 	var distance_from_player = Vector2(current_frame - player.current_frame, current_floor - player.current_floor);
 	var distance_from_campfires = [];
 	
@@ -77,15 +80,19 @@ func monster_action():
 			campfire_near_player.append(true);
 		else:
 			campfire_near_player.append(false)
-		
-	#############################################################################################
-		
+	
+	
+	enrage = false;
+	
+	new_frame = current_frame;
+	new_floor = current_floor;
+
 	var action_complete = false;
 		
 	# if no light in the world, game over
 	if campfires == [] and player_torch == false:
-		current_frame = player.current_frame;
-		current_floor = player.current_floor;
+		new_frame = player.current_frame;
+		new_floor = player.current_floor;
 		action_complete = true;
 		print("no light in world");
 	
@@ -112,17 +119,17 @@ func monster_action():
 			direction = move_towards(distance_from_player);
 			print("hunt");
 			
-		current_frame += direction.x;
-		current_floor += direction.y;
+		new_frame += direction.x;
+		new_floor += direction.y;
 		
 	#if monster is wondering...
 	if action_complete == false and is_wondering:
 		print("am wunder, ooo")
 		action_complete = true;
 		rng.randomize()
-		current_frame += rng.randi_range(-1, 1);
+		new_frame += rng.randi_range(-1, 1);
 		rng.randomize();
-		current_floor += rng.randi_range(-1, 1);
+		new_floor += rng.randi_range(-1, 1);
 		
 	#if monster is within 4x4 of campfire...
 	if action_complete == false:
@@ -137,8 +144,8 @@ func monster_action():
 					#approach campfire
 					
 					direction = move_towards(fire);
-					current_frame += direction.x;
-					current_floor += direction.y;
+					new_frame += direction.x;
+					new_floor += direction.y;
 					print("player not near: approach campfire");
 					
 					break;
@@ -152,10 +159,16 @@ func monster_action():
 			direction = move_towards(distance_from_campfires[0]);
 		else:
 			direction = move_towards(distance_from_player);
-		current_frame += direction.x;
-		current_floor += direction.y;
+		new_frame += direction.x;
+		new_floor += direction.y;
 		print("none");
 		#walk towards any campfire
+	
+	if new_frame >= -8 and new_frame <= 8:
+		current_frame = new_frame
+	
+	if new_floor >= -5 and new_floor <= 5:
+		current_floor = new_floor
 		
 	####################################################d################################################
 	

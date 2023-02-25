@@ -1,8 +1,8 @@
 extends StaticBody2D
 
 export var light_level = 3;
-export var time_remaining = 380;
-export var time_per_level = 100;
+export var time_remaining = 50;
+export var time_per_level = 50;
 
 var current_floor = 0;
 var current_frame = 0;
@@ -15,8 +15,6 @@ var light_mat1 = preload("res://Sprites/Lights/CampfireLightSmall.png")
 func _ready():
 	light_materials = [light_mat1, light_mat2, light_mat3];
 	update_info();
-	
-	
 
 func update_info():
 	if position.x >= 0:
@@ -28,6 +26,8 @@ func update_info():
 		current_floor = int(position.y) / 168;
 	elif global_position.y < 0:
 		current_floor = int(position.y) / 168 - 1;
+		
+	switch_texture();
 
 func _process(delta):
 	time_remaining -= delta;

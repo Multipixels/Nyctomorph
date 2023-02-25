@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Campfire.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Lights/LightBall.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/campfire.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Materials/light_object.tres" type="Material" id=4]
 
@@ -11,8 +10,7 @@ extents = Vector2( 5, 2.5 )
 [node name="Campfire" type="StaticBody2D" groups=["Campfire"]]
 material = ExtResource( 4 )
 script = ExtResource( 1 )
-time_remaining = 50
-time_per_level = 50
+light_level = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
@@ -22,5 +20,4 @@ material = ExtResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="CampfireLight" type="Light2D" parent="."]
-texture = ExtResource( 2 )
 mode = 2
