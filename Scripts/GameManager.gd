@@ -3,10 +3,12 @@ extends Node2D
 var time_passed = 0;
 var win_time = 300;
 
-onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
+onready var timer = $DeathKnell
+onready var light_timer = $LightsTimer
+onready var second = $TwoSec
 
-func _ready():
-	Engine.time_scale = 1;
+onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
+onready var attack = load("res://Scenes/AttackLayer.tscn")
 
 func _process(delta):
 	time_passed += delta;
@@ -18,6 +20,34 @@ func _process(delta):
 		
 
 func _on_Monster_caught_player():
-	print("game lost: reset scene")
+	timer.start()
+	light_timer.start()
+
+
+func _on_DeathKnell_timeout() -> void:
+	var new_attack = attack.instance()
+	get_parent().add_child(new_attack)
+	second.start()
+	
+
+
+func _on_LightsTimer_timeout() -> void:
+	for each in get_tree().get_nodes_in_group("Campfire"):
+		each.queue_free()
+		
+	for each in get_tree().get_nodes_in_group("Top"):
+		each.queue_free()
+		
+	for each in get_tree().get_nodes_in_group("Bot"):
+		each.queue_free()
+		
+	for each in get_tree().get_nodes_in_group("UI"):
+		each.visible = false
+		
+	for each in get_tree().get_nodes_in_group("Player"):
+		each.visible = false
+		
+
+
+func _on_OneSec_timeout() -> void:
 	get_tree().change_scene("res://Scenes/DeadMenu.tscn")
-	pass #lose game

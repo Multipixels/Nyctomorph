@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/icon="res://Sprites/icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+
 [debug]
 
 settings/fps/force_fps=15
@@ -34,6 +38,10 @@ window/stretch/aspect="keep"
 
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
+
+[global]
+
+time=false
 
 [gui]
 

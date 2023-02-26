@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AllFloors.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/Twig.png" type="Texture" id=6]
-[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/GameManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/TimeUI.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/CreateTwigs.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/FuelTorch.png" type="Texture" id=10]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Sprites/PickUp.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Place.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Fuel.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/StaticOverlay.tscn" type="PackedScene" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Twig.png 0"
@@ -57,10 +58,11 @@ script = ExtResource( 9 )
 position = Vector2( 25, 62 )
 time_remaining = 150
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
+
+[node name="StaticOverlay" parent="UI" instance=ExtResource( 15 )]
 
 [node name="TimeUISprite" type="Sprite" parent="UI"]
-visible = false
 position = Vector2( 41.5, 8 )
 texture = ExtResource( 8 )
 vframes = 7
@@ -96,7 +98,8 @@ texture = ExtResource( 14 )
 visible = false
 zoom = Vector2( 1, 2 )
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource( 7 )
+[node name="GameManager" parent="." instance=ExtResource( 7 )]
 
+[connection signal="static_level" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_level"]
+[connection signal="static_offset" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_offset"]
 [connection signal="caught_player" from="YSort/Monster" to="GameManager" method="_on_Monster_caught_player"]

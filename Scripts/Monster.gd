@@ -12,6 +12,7 @@ extends Node2D
 #(180-240) Roam: 2 actions, Hunt: 4 actions,  (starts at 30 actions)
 #(240-300) Roam: 1 action, Hunt: 5 actions    (starts at 42 actions)
 
+onready var loom = load("res://Scenes/Loom.tscn")
 
 var action_timer_default = 5;
 var action_timer = 30;
@@ -70,7 +71,12 @@ func _process(delta):
 		
 	# if monster in same frame as player, game over.
 	if Vector2.ZERO == Vector2(current_frame - player.current_frame, current_floor - player.current_floor):
+		var creep = loom.instance()
+		creep.global_position = player.global_position
+		creep.global_position.y = current_floor*168 + 42
+		get_parent().add_child(creep)
 		emit_signal("caught_player");
+		queue_free()
 		#print("game over, monster is in same frame as player.")
 		
 func monster_action():
@@ -231,3 +237,6 @@ func move_towards(difference: Vector2):
 		return Vector2(0, -1);
 	return Vector2(0, 1);
 
+
+func get_distance_to_player():
+	return abs(current_frame - player.current_frame) + abs(current_floor - player.current_floor)

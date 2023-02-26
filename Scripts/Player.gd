@@ -39,6 +39,8 @@ onready var twig_scene = load("res://Scenes/Twig.tscn")
 onready var campfire_scene = load("res://Scenes/Campfire.tscn")
 
 
+signal static_level(new_level)
+signal static_offset(offset)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,6 +68,11 @@ func _process(delta):
 		torchLight.enabled = false;
 		fire_animation_player.play("NoFire")
 		max_twigs = 3
+		
+	for each in get_tree().get_nodes_in_group("Monster"):
+		var level = 5 - (int(each.get_distance_to_player()))
+		emit_signal("static_level", level)
+		emit_signal("static_offset", int(round(global_position.x))%2)
 
 func _physics_process(_delta):
 	

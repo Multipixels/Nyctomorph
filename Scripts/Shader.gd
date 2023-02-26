@@ -24,6 +24,12 @@ export(bool) var show_in_editor = false setget show_in_editor_set
 
 
 func _ready() -> void:
+	
+	if Global.current_shader != null:
+		shader = Global.current_shader
+	else:
+		Global.current_shader = shader
+	
 	select_shader(shader);
 	reflect_editor_changes()
 
@@ -32,6 +38,7 @@ func _input(event):
 	
 	if event.is_action_pressed("change_pallete"):
 		shader = cycle_enum(shader);
+		Global.current_shader = shader
 		select_shader(shader);
 
 

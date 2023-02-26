@@ -5,6 +5,7 @@
 
 [node name="Shader" type="CanvasLayer"]
 script = ExtResource( 1 )
+shader = 1
 
 [node name="ShaderOverlay" type="ColorRect" parent="."]
 visible = false

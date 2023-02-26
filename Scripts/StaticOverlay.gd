@@ -17,3 +17,13 @@ func _on_Timer_timeout() -> void:
 
 func set_intensity(new_int: int) -> void:
 	intensity = clamp(new_int, 0, 4)
+
+
+func _on_Player_static_level(new_level) -> void:
+	set_intensity(new_level)
+
+
+func _on_Player_static_offset(is_offset) -> void:
+	if is_offset: offset.x = 1
+	else: offset.x = 0
+		

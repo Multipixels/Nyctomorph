@@ -4,6 +4,7 @@
 [ext_resource path="res://Scripts/StaticOverlay.gd" type="Script" id=2]
 
 [node name="StaticOverlay" type="Sprite"]
+position = Vector2( 24, 42 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 48, 84 )
