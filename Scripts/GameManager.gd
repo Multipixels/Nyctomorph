@@ -1,7 +1,7 @@
 extends Node2D
 
 var time_passed = 0;
-var win_time = 360;
+var win_time = 300;
 
 onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
 

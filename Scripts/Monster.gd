@@ -1,17 +1,33 @@
 extends Node2D
 
-var action_timer_default = 10;
-var action_timer = action_timer_default;
+#Player needs to stay alive for 300 seconds.
 
-var wondering_switch_timer_default = 30;
-var wondering_switch_timer = wondering_switch_timer_default;
+#Campfire lasts 30 seconds per level. initial campfire lasts 60 seconds.
+#this means player needs to find minimum 8 twigs.
+
+#Monster doesn't start moving until 30 seconds into the game.
+#Every 5 seconds it will move.
+#(30-120) Roam: 4 actions, Hunt: 2 actions
+#(120-180) Roam: 3 actions, Hunt: 3 actions, (starts at 18 actions)
+#(180-240) Roam: 2 actions, Hunt: 4 actions,  (starts at 30 actions)
+#(240-300) Roam: 1 action, Hunt: 5 actions    (starts at 42 actions)
+
+
+var action_timer_default = 5;
+var action_timer = 30;
+
+var wondering_action_default = 4;
+var wondering_action = wondering_action_default;
+
+var hunting_action_default = 2;
 
 var current_frame = 0
 var current_floor = 0;
 
+var total_actions = 0;
+
 var player;
 
-var is_wondering = true;
 var rng = RandomNumberGenerator.new()
 
 signal caught_player();
@@ -37,15 +53,20 @@ func _process(delta):
 		action_timer = 0;
 	
 	action_timer -= delta
-	wondering_switch_timer -= delta
 	
 	if action_timer <= 0:
 		monster_action();
 		action_timer = action_timer_default;
 		
-	if wondering_switch_timer <= 0:
-		is_wondering = !is_wondering;
-		wondering_switch_timer = wondering_switch_timer_default;
+	if total_actions >= 42:
+		hunting_action_default = 5
+		wondering_action_default = 1
+	elif total_actions >= 30:
+		hunting_action_default = 4
+		wondering_action_default = 2
+	elif total_actions >= 18:
+		hunting_action_default = 3
+		wondering_action_default = 3
 		
 	# if monster in same frame as player, game over.
 	if Vector2.ZERO == Vector2(current_frame - player.current_frame, current_floor - player.current_floor):
@@ -55,6 +76,7 @@ func _process(delta):
 func monster_action():
 	var new_floor;
 	var new_frame;
+	var is_wondering;
 	
 	var enrage;
 	
@@ -69,6 +91,8 @@ func monster_action():
 	
 	var campfire_near_player = [];
 	
+	is_wondering = wondering_action <= wondering_action_default;
+		
 	#check all campfires. store distance. check if near player.
 	for item in campfires:
 		var the_campfire = Vector2(current_frame - item.current_frame, current_floor - item.current_floor);
@@ -80,7 +104,6 @@ func monster_action():
 			campfire_near_player.append(true);
 		else:
 			campfire_near_player.append(false)
-	
 	
 	enrage = false;
 	
@@ -178,6 +201,10 @@ func monster_action():
 	
 	action_timer = action_timer_default;
 	if enrage: action_timer /= 2;
+	
+	wondering_action -= 1;
+	if wondering_action <= 0:
+		wondering_action = wondering_action_default + hunting_action_default;
 	
 	####################################################################################################
 	

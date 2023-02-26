@@ -6,6 +6,12 @@ onready var torchLight = $TorchLight
 onready var placeChecker = $PlaceChecker
 onready var entranceChecker = $EntranceChecker
 
+onready var fuelTorch = get_parent().get_parent().get_node("UI/FuelTorch")
+onready var drop = get_parent().get_parent().get_node("UI/Drop")
+onready var place = get_parent().get_parent().get_node("UI/Place")
+onready var pickup = get_parent().get_parent().get_node("UI/PickUp")
+onready var fuel = get_parent().get_parent().get_node("UI/Fuel")
+
 signal move_floor(flooor);
 
 var current_frame = 0;
@@ -24,7 +30,8 @@ var canMoveTimer = 0.0;
 var current_twigs = 0;
 var max_twigs = 3;
 
-var torch_time_remaining = 150;
+var torch_time_remaining = 0;
+var max_torch_time = 30;
 
 onready var twig_scene = load("res://Scenes/Twig.tscn")
 onready var campfire_scene = load("res://Scenes/Campfire.tscn")
@@ -107,24 +114,56 @@ func _physics_process(_delta):
 	var areas = placeChecker.get_overlapping_areas();
 	var items = bodies + areas;
 	
+	var tooltips = []
+	var canPlace = true;
+	
+	for item in items:
+		if not item.is_in_group("Twig"):
+			canPlace = false;
+	
+	if canPlace and torch_time_remaining > 0 and current_twigs == 0:
+		tooltips.append(3)
+	elif canPlace and current_twigs >= 1:
+		tooltips.append(2)
+	
+	
+	for each in items:
+		
+		if current_twigs >= 1:
+			if each.is_in_group("Campfire"):
+				tooltips = [1]
+				break;
+			
+		if each.is_in_group("Campfire") and torch_time_remaining > 0:
+			tooltips.append(5)
+			tooltips.erase(3);
+		elif current_twigs <= 2 or (torch_time_remaining > 0 and current_twigs != 1):
+			if each.is_in_group("Twig"):
+				tooltips.append(4)
+				
+	
+	
+	tooltip(tooltips);
+	
 	if Input.is_action_just_pressed("interact"):
 
 		var action = true;
 		
 		for each in items:
+			
+			if action and current_twigs > 0:
+				if each.is_in_group("Campfire") and current_twigs < max_twigs:
+					action = false;
+					torch_time_remaining = max_torch_time;
+					current_twigs -= 1;
+					break;
+			
 			if each.is_in_group("Twig") and current_twigs < max_twigs:
 				action = false;
 				current_twigs += 1;
 				each.queue_free();
 				break;
 				
-		if action and current_twigs > 0:
-			for body in items:
-				if body.is_in_group("Campfire") and current_twigs < max_twigs:
-					torch_time_remaining = 150;
-					current_twigs -= 1;
-					break;
-	
 	if Input.is_action_just_pressed("consume"):
 		var action = true;
 		
@@ -180,7 +219,7 @@ func _physics_process(_delta):
 				
 			elif campfire != null:
 				
-				campfire.add_fuel(torch_time_remaining/150)
+				campfire.add_fuel(torch_time_remaining/max_torch_time)
 				torch_time_remaining = 0
 	
 	######################################################################################
@@ -239,3 +278,23 @@ func _on_ArrowUp_body_entered(body):
 	canMoveTimer = 1;
 	
 	position.y -= 148;
+
+func tooltip(value):
+	fuelTorch.hide()
+	drop.hide()
+	place.hide()
+	pickup.hide()
+	fuel.hide()
+	
+	for each in value:
+		match each:
+			1:
+				fuelTorch.show()
+			2:
+				drop.show()
+			3:
+				place.show()
+			4:
+				pickup.show()
+			5:
+				fuel.show()

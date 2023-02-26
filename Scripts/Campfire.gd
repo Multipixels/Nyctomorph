@@ -1,8 +1,11 @@
 extends StaticBody2D
 
-export var light_level = 3;
-export var time_remaining = 50;
-export var time_per_level = 50;
+#Campfire lasts 30 seconds per level. initial campfire lasts 60 seconds.
+#this means player needs to find minimum 8 twigs.
+
+export var light_level = 2;
+export var time_remaining = 60;
+export var time_per_level = 30;
 
 var current_floor = 0;
 var current_frame = 0;
