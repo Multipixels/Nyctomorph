@@ -41,7 +41,7 @@
 position = Vector2( 12, 64 )
 
 [node name="Monster" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( -360, -792 )
+position = Vector2( -44, 56 )
 
 [node name="Twigs" type="YSort" parent="YSort"]
 
@@ -56,6 +56,7 @@ script = ExtResource( 9 )
 [node name="AllFloors" parent="YSort" instance=ExtResource( 2 )]
 
 [node name="Campfire" parent="YSort" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 25, 62 )
 time_remaining = 150
 
@@ -98,15 +99,16 @@ visible = false
 position = Vector2( 24, 42 )
 texture = ExtResource( 16 )
 
-[node name="Shader" parent="." instance=ExtResource( 5 )]
-pause_mode = 2
-
 [node name="DebugCamera" type="Camera2D" parent="."]
 visible = false
 zoom = Vector2( 1, 2 )
 
 [node name="GameManager" parent="." instance=ExtResource( 7 )]
 pause_mode = 2
+
+[node name="Shader" parent="." instance=ExtResource( 5 )]
+pause_mode = 2
+layer = 5
 
 [connection signal="static_level" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_level"]
 [connection signal="static_offset" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_offset"]
