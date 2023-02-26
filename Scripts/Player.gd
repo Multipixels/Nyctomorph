@@ -16,6 +16,7 @@ onready var pickup = get_parent().get_parent().get_node("UI/PickUp")
 onready var fuel = get_parent().get_parent().get_node("UI/Fuel")
 
 signal move_floor(flooor);
+signal send_tip(tip);
 
 var current_frame = 0;
 var current_floor = 0;
@@ -34,7 +35,7 @@ var current_twigs = 0;
 var max_twigs = 3;
 
 var torch_time_remaining = 0;
-var max_torch_time = 30;
+var max_torch_time = 45;
 
 onready var twig_scene = load("res://Scenes/Twig.tscn")
 onready var campfire_scene = load("res://Scenes/Campfire.tscn")
@@ -46,10 +47,24 @@ onready var place_sound = load("res://Audio/place.mp3")
 onready var down_sound = load("res://Audio/goDown.mp3")
 onready var up_sound = load("res://Audio/goUp.mp3")
 
+var isTooLate = false;
 
+var player_find_sticks = false; # I need fuel for this fire
+var player_in_dark = false; # I need some light
+var player_relocate = false; # This looks like a good spot for a new campfire
+var player_near_monster = false; # I feel like something is watching me...
+
+var campfires;
 
 signal static_level(new_level)
+var static_level = 0;
 signal static_offset(offset)
+
+func _ready():
+	player_find_sticks = true;
+	emit_signal("send_tip", 1)
+	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -57,7 +72,14 @@ func _process(delta):
 	torch_time_remaining -= delta;
 	
 	playerSpeed = 24 - 3 * current_twigs;
-	animation_player.playback_speed = (24 / playerSpeed) * 1.1
+	animation_player.playback_speed = (24 / playerSpeed) * 1.1 * Engine.time_scale;
+	
+	
+	
+	if !player_near_monster:
+		if static_level >= 2:
+			player_near_monster = true;
+			emit_signal("sent_tip", 4);
 	
 	if canMoveTimer <= 0:
 		canMove = true;
@@ -80,6 +102,7 @@ func _process(delta):
 		
 	for each in get_tree().get_nodes_in_group("Monster"):
 		var level = 5 - (int(each.get_distance_to_player()))
+		static_level = level;
 		emit_signal("static_level", level)
 		emit_signal("static_offset", int(round(global_position.x))%2)
 
@@ -96,7 +119,7 @@ func _physics_process(_delta):
 		sprite.global_position = (global_position.round() + Vector2(0, -15))
 		torchLight.global_position = global_position.round()
 		
-		if movement_velocity.distance_to(Vector2.ZERO) > 0.01 :
+		if movement_velocity.distance_to(Vector2.ZERO) > 0.01 and Engine.time_scale:
 			walk_animate(motion)
 			
 		else:
@@ -105,12 +128,12 @@ func _physics_process(_delta):
 	else:
 		idle_animate()
 		
-	if motion.x < 0 and canMove:
+	if motion.x < 0 and canMove and Engine.time_scale:
 		sprite.flip_h = true
 		torchSprite.scale.x = -1
 		torchLight.scale.x = -1
 		placeChecker.position.x = -12
-	elif motion.x > 0 and canMove:
+	elif motion.x > 0 and canMove and Engine.time_scale:
 		sprite.flip_h = false
 		torchSprite.scale.x = 1
 		torchLight.scale.x = 1
@@ -179,7 +202,7 @@ func _physics_process(_delta):
 	
 	tooltip(tooltips);
 	
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") and !isTooLate:
 
 		var action = true;
 		
@@ -203,7 +226,7 @@ func _physics_process(_delta):
 		if action:
 			play_sound(invalid_sound);
 				
-	if Input.is_action_just_pressed("consume"):
+	if Input.is_action_just_pressed("consume") and !isTooLate:
 		var action = true;
 		
 	
@@ -294,6 +317,27 @@ func _physics_process(_delta):
 		position.x = round(position.x);
 		position.y = round(position.y);
 		canMoveTimer = 0.75
+		
+	if !player_in_dark or !player_relocate:
+		campfires = get_tree().get_nodes_in_group("Campfire");
+		var campfire_near_player = []
+		
+		for item in campfires:
+			var the_campfire = Vector2(current_frame - item.current_frame, current_floor - item.current_floor);
+			
+			
+			if abs(the_campfire.x) <= 1 and abs(the_campfire.y) <= 1:
+				campfire_near_player.append(true);
+			else:
+				campfire_near_player.append(false);
+				
+		if not true in campfire_near_player and not player_in_dark and torch_time_remaining <= 0:
+			player_in_dark = true;
+			emit_signal("send_tip", 2);
+			
+		if not true in campfire_near_player and not player_relocate and torch_time_remaining > 0 and current_twigs > 0:
+			player_relocate = true;
+			emit_signal("sent_tip", 3);
 
 
 func walk_animate(vec):
