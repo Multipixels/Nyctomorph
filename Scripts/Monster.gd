@@ -74,7 +74,7 @@ func _process(delta):
 		get_parent().add_child(creep)
 		emit_signal("caught_player");
 		queue_free()
-		#print("game over, monster is in same frame as player.")
+		##print("game over, monster is in same frame as player.")
 		
 func monster_action():
 	var new_floor;
@@ -120,37 +120,37 @@ func monster_action():
 		new_frame = player.current_frame;
 		new_floor = player.current_floor;
 		action_complete = true;
-		print("no light in world");
+		##print("no light in world");
 	
 	
 	#if monster is within 5x5 of player...
 	if action_complete != true and abs(distance_from_player.x) <= 2 and abs(distance_from_player.y) <= 2:
 		action_complete = true;
 		var direction;
-		print("monster within 5x5 of player:");
+		##print("monster within 5x5 of player:");
 		
 		#if player near campfire, run away
 		if true in campfire_near_player:
 			direction = move_towards(distance_from_player) * -1;
-			print("player near campfire, run away");
+			##print("player near campfire, run away");
 		
 		#if player has torch, approach
 		elif player_torch == true:
 			direction = move_towards(distance_from_player);
-			print("player has torch, approach");
+			##print("player has torch, approach");
 			
 		#if player has no torch and not near campfire, approach
 		else:
 			enrage = true;
 			direction = move_towards(distance_from_player);
-			print("hunt");
+			#print("hunt");
 			
 		new_frame += direction.x;
 		new_floor += direction.y;
 		
 	#if monster is wondering...
 	if action_complete == false and is_wondering:
-		print("am wunder, ooo")
+		#print("am wunder, ooo")
 		action_complete = true;
 		rng.randomize()
 		new_frame += rng.randi_range(-1, 1);
@@ -162,8 +162,8 @@ func monster_action():
 		var index = 0;
 		for fire in distance_from_campfires:
 			if abs(fire.x) <= 2 and abs(fire.y) <= 2:
-				print("monster within 5x5 of campfire:");
-				print(campfires[index].name)
+				#print("monster within 5x5 of campfire:");
+				#print(campfires[index].name)
 				if campfire_near_player[index] == false:
 					action_complete = true;
 					var direction;
@@ -172,10 +172,10 @@ func monster_action():
 					direction = move_towards(fire);
 					new_frame += direction.x;
 					new_floor += direction.y;
-					print("player not near: approach campfire");
+					#print("player not near: approach campfire");
 					
 					break;
-				print("but player is near");
+				#print("but player is near");
 			index+=1;
 	
 	# none of the above:
@@ -187,7 +187,7 @@ func monster_action():
 			direction = move_towards(distance_from_player);
 		new_frame += direction.x;
 		new_floor += direction.y;
-		print("none");
+		#print("none");
 		#walk towards any campfire
 	
 	if new_frame >= -8 and new_frame <= 8:
@@ -217,10 +217,10 @@ func monster_action():
 		var the_campfire = Vector2(current_frame - item.current_frame, current_floor - item.current_floor);
 		
 		if the_campfire == Vector2.ZERO:
-			print("destroy campfire")
+			#print("destroy campfire")
 			item.queue_free();
 	
-	print(position);
+	#print(position);
 	
 	
 	

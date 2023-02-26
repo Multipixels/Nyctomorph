@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Nokia"
-run/main_scene="res://Scenes/MainMenu.tscn"
+run/main_scene="res://Scenes/LogoSplash.tscn"
 config/use_custom_user_dir=true
 config/icon="res://Sprites/icon.png"
 
