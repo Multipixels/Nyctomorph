@@ -10,7 +10,9 @@ config_version=4
 
 [application]
 
-config/name="Nokia"
+config/name="Nyctomorph"
+config/description="A short adventure survival game made for the 5th Nokia 3310 Game Jam.
+By Multipixels and Conscience"
 run/main_scene="res://Scenes/LogoSplash.tscn"
 config/use_custom_user_dir=true
 boot_splash/show_image=false
