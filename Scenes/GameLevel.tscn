@@ -63,6 +63,8 @@ time_remaining = 150
 
 [node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
 
+[node name="StaticOverlay" parent="UI" instance=ExtResource( 15 )]
+
 [node name="TimeUISprite" type="Sprite" parent="UI"]
 position = Vector2( 41.5, 8 )
 texture = ExtResource( 8 )
@@ -123,8 +125,6 @@ frame = 4
 [node name="E" type="Sprite" parent="UI/Tips/tip5"]
 position = Vector2( 16.5, -21 )
 texture = ExtResource( 18 )
-
-[node name="StaticOverlay" parent="UI" instance=ExtResource( 15 )]
 
 [node name="FuelTorch" type="Sprite" parent="UI"]
 visible = false

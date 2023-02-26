@@ -1,7 +1,7 @@
 extends Node2D
 
 var time_passed = 0;
-var win_time = 300;
+var win_time = 300.0;
 
 onready var timer = $DeathKnell
 onready var light_timer = $LightsTimer
@@ -23,7 +23,7 @@ var isShowingTip = false;
 func activate_tip(tip):
 	Engine.time_scale = 0;
 	isShowingTip = true;
-	print("show tip ", tip)
+	#print("show tip ", tip)
 	match tip:
 		1: 
 			get_parent().get_node("UI/Tips/tip1").show()
@@ -40,13 +40,7 @@ func activate_tip(tip):
 onready var attack = load("res://Scenes/AttackLayer.tscn")
 
 func _input(event):
-	if !isShowingTip and event.is_action_pressed("pause"):
-		Engine.time_scale = abs(Engine.time_scale - 1);
-		get_tree().paused = !get_tree().paused;
-		
-		pauseUI.visible = !pauseUI.visible;
-		
-	if event.is_action_pressed("interact"):
+	if !pauseUI.visible and event.is_action_pressed("interact"):
 		tip1.hide();
 		tip2.hide();
 		tip3.hide();
@@ -54,14 +48,28 @@ func _input(event):
 		tip5.hide();
 		isShowingTip = false;
 		Engine.time_scale = 1;
+		
+	if pauseUI.visible and event.is_action_pressed("interact"):
+		Engine.time_scale = abs(Engine.time_scale - 1);
+		get_tree().paused = !get_tree().paused;
+		
+		pauseUI.visible = !pauseUI.visible;
+	
+	if !isShowingTip and event.is_action_pressed("pause"):
+		Engine.time_scale = abs(Engine.time_scale - 1);
+		get_tree().paused = !get_tree().paused;
+		
+		pauseUI.visible = !pauseUI.visible;
+		
+	
 
 func _process(delta):
 	
 	time_passed += delta;
 	
-	time_ui_sprite.set_frame(int(time_passed) / 50);
+	time_ui_sprite.set_frame(int(time_passed) / (win_time/6));
 	
-	if shownTip5 == false and (int(time_passed) / 50) >= 5:
+	if shownTip5 == false and (int(time_passed) / (win_time/6)) >= 5:
 		shownTip5 = true;
 		activate_tip(5);
 	
