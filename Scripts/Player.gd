@@ -57,7 +57,7 @@ var player_near_monster = false; # I feel like something is watching me...
 var campfires;
 
 signal static_level(new_level)
-var static_level = 0;
+var static_level_value = 0;
 signal static_offset(offset)
 
 func _ready():
@@ -77,9 +77,9 @@ func _process(delta):
 	
 	
 	if !player_near_monster:
-		if static_level >= 2:
+		if static_level_value >= 2:
 			player_near_monster = true;
-			emit_signal("sent_tip", 4);
+			emit_signal("send_tip", 4);
 	
 	if canMoveTimer <= 0:
 		canMove = true;
@@ -102,7 +102,7 @@ func _process(delta):
 		
 	for each in get_tree().get_nodes_in_group("Monster"):
 		var level = 5 - (int(each.get_distance_to_player()))
-		static_level = level;
+		static_level_value = level;
 		emit_signal("static_level", level)
 		emit_signal("static_offset", int(round(global_position.x))%2)
 
@@ -334,10 +334,11 @@ func _physics_process(_delta):
 		if not true in campfire_near_player and not player_in_dark and torch_time_remaining <= 0:
 			player_in_dark = true;
 			emit_signal("send_tip", 2);
-			
+		
+		
 		if not true in campfire_near_player and not player_relocate and torch_time_remaining > 0 and current_twigs > 0:
 			player_relocate = true;
-			emit_signal("sent_tip", 3);
+			emit_signal("send_tip", 3);
 
 
 func walk_animate(vec):
