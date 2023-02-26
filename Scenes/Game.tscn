@@ -5,11 +5,12 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Twig.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Campfire.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/campfire.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Campfire.png" type="Texture" id=6]
 [ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/ExampleAreaOld.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Lights/LightBall.png" type="Texture" id=10]
+
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 11, 7 )

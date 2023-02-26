@@ -13,7 +13,7 @@ onready var attack = load("res://Scenes/AttackLayer.tscn")
 func _process(delta):
 	time_passed += delta;
 	
-	time_ui_sprite.set_frame(int(time_passed) / 60);
+	time_ui_sprite.set_frame(int(time_passed) / 50);
 	
 	if time_passed > win_time:
 		get_tree().change_scene("res://Scenes/WinMenu.tscn")

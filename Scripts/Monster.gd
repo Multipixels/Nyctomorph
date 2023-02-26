@@ -50,9 +50,6 @@ func _ready():
 	position.y = 168 * current_floor + 48;
 
 func _process(delta):
-	if Input.is_action_just_pressed("light_toggle"):
-		action_timer = 0;
-	
 	action_timer -= delta
 	
 	if action_timer <= 0:
@@ -106,7 +103,7 @@ func monster_action():
 		
 		distance_from_campfires.append(the_campfire);
 		
-		if abs(player_campfire.x) <= 3 and abs(player_campfire.y) <= 3:
+		if abs(player_campfire.x) <= 2 and abs(player_campfire.y) <= 2:
 			campfire_near_player.append(true);
 		else:
 			campfire_near_player.append(false)
@@ -126,8 +123,8 @@ func monster_action():
 		print("no light in world");
 	
 	
-	#if monster is within 4x4 of player...
-	if action_complete != true and abs(distance_from_player.x) <= 3 and abs(distance_from_player.y) <= 3:
+	#if monster is within 5x5 of player...
+	if action_complete != true and abs(distance_from_player.x) <= 2 and abs(distance_from_player.y) <= 2:
 		action_complete = true;
 		var direction;
 		print("monster within 4x4 of player:");
@@ -160,11 +157,11 @@ func monster_action():
 		rng.randomize();
 		new_floor += rng.randi_range(-1, 1);
 		
-	#if monster is within 4x4 of campfire...
+	#if monster is within 5x5 of campfire...
 	if action_complete == false:
 		var index = 0;
 		for fire in distance_from_campfires:
-			if abs(fire.x) <= 3 and abs(fire.y) <= 3:
+			if abs(fire.x) <= 2 and abs(fire.y) <= 2:
 				print("monster within 4x4 of campfire:");
 				print(campfires[index].name)
 				if campfire_near_player[index] == false:

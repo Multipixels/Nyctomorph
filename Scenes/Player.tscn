@@ -330,7 +330,7 @@ script = ExtResource( 6 )
 [node name="TorchLight" type="Light2D" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 10, -20 )
-texture_scale = 0.6
+texture_scale = 0.9
 mode = 2
 
 [node name="MainSprite" type="Sprite" parent="."]
@@ -339,13 +339,13 @@ position = Vector2( 0, -15 )
 texture = ExtResource( 3 )
 hframes = 10
 vframes = 8
-frame = 30
+frame = 10
 
 [node name="TorchLightSprite" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 offset = Vector2( 8, -23.5 )
 hframes = 12
-frame = 8
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.5 )
@@ -374,5 +374,7 @@ anims/FireLarge = SubResource( 20 )
 anims/FireMed = SubResource( 21 )
 anims/FireSmall = SubResource( 22 )
 anims/NoFire = SubResource( 23 )
+
+[node name="Sounds" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="move_floor" from="." to="LessSlidyCamera" method="_on_Player_move_floor"]
