@@ -8,9 +8,19 @@ onready var light_timer = $LightsTimer
 onready var second = $TwoSec
 
 onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
+onready var pauseUI = get_parent().get_node("UI/Pause");
+
 onready var attack = load("res://Scenes/AttackLayer.tscn")
 
+func _input(event):
+	if event.is_action_pressed("pause"):
+		Engine.time_scale = abs(Engine.time_scale - 1);
+		get_tree().paused = !get_tree().paused;
+		
+		pauseUI.visible = !pauseUI.visible;
+
 func _process(delta):
+	
 	time_passed += delta;
 	
 	time_ui_sprite.set_frame(int(time_passed) / 50);

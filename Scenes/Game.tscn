@@ -11,7 +11,6 @@
 [ext_resource path="res://Sprites/icon.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Lights/LightBall.png" type="Texture" id=10]
 
-
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 11, 7 )
 

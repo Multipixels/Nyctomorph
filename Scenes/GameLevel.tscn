@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AllFloors.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Sprites/Place.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Fuel.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/StaticOverlay.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Sprites/pause.png" type="Texture" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Twig.png 0"
@@ -92,13 +93,20 @@ visible = false
 position = Vector2( 10, 80 )
 texture = ExtResource( 14 )
 
+[node name="Pause" type="Sprite" parent="UI"]
+visible = false
+position = Vector2( 24, 42 )
+texture = ExtResource( 16 )
+
 [node name="Shader" parent="." instance=ExtResource( 5 )]
+pause_mode = 2
 
 [node name="DebugCamera" type="Camera2D" parent="."]
 visible = false
 zoom = Vector2( 1, 2 )
 
 [node name="GameManager" parent="." instance=ExtResource( 7 )]
+pause_mode = 2
 
 [connection signal="static_level" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_level"]
 [connection signal="static_offset" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_offset"]
