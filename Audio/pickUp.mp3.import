@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/pickup.mp3-c33c1beba2c463e92daf13b3d97ee6a9.mp3str"
+path="res://.import/pickUp.mp3-816cc6cd2fd3184c1a3890aa1c07c016.mp3str"
 
 [deps]
 
-source_file="res://Audio/pickup.mp3"
-dest_files=[ "res://.import/pickup.mp3-c33c1beba2c463e92daf13b3d97ee6a9.mp3str" ]
+source_file="res://Audio/pickUp.mp3"
+dest_files=[ "res://.import/pickUp.mp3-816cc6cd2fd3184c1a3890aa1c07c016.mp3str" ]
 
 [params]
 

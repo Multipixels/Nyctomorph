@@ -5,7 +5,6 @@
 [ext_resource path="res://Scenes/Monster.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Campfire.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/MainShader.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Twig.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/GameManager.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/TimeUI.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/CreateTwigs.gd" type="Script" id=9]
@@ -18,13 +17,14 @@
 [ext_resource path="res://Sprites/pause.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/Dialogue.png" type="Texture" id=17]
 [ext_resource path="res://Sprites/E.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Highlight.png" type="Texture" id=19]
 
 [sub_resource type="TileSet" id=1]
-0/name = "Twig.png 0"
-0/texture = ExtResource( 6 )
+0/name = "Highlight.png 0"
+0/texture = ExtResource( 19 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 5, 3 )
+0/region = Rect2( 0, 0, 4, 2 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -52,7 +52,7 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 5, 3 )
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( -17170467, 0, 0, -17170401, 0, 0, -13959223, 0, 0, -13500341, 0, 0, -10354646, 0, 0, -9633830, 0, 0, -6488122, 0, 0, -6094777, 0, 0, -3014621, 0, 0, -2424850, 0, 0, 851973, 0, 0, 1048536, 0, 0, 1310772, 0, 0, 4915186, 0, 0, 4980787, 0, 0, 8323033, 0, 0, 8585228, 0, 0, 12124198, 0, 0, 12517316, 0, 0, 15466478, 0, 0, 16056339, 0, 0, 19333184, 0, 0, 19529658, 0, 0 )
+tile_data = PoolIntArray( -17432593, 0, 0, -17301559, 0, 0, -17170453, 0, 0, -17235936, 0, 0, -17235904, 0, 0, -13959222, 0, 0, -13696999, 0, 0, -13500437, 0, 0, -13500338, 0, 0, -9895948, 0, 0, -9961451, 0, 0, -9830456, 0, 0, -9830331, 0, 0, -9568320, 0, 0, -6291476, 0, 0, -5963844, 0, 0, -6029273, 0, 0, -2555843, 0, 0, -2293777, 0, 0, 786437, 0, 0, 983047, 0, 0, 1179608, 0, 0, 4522037, 0, 0, 4915168, 0, 0, 8388655, 0, 0, 8519648, 0, 0, 8519753, 0, 0, 12124106, 0, 0, 12058677, 0, 0, 12255229, 0, 0, 12320710, 0, 0, 15728605, 0, 0, 15794217, 0, 0, 19267546, 0, 0, 19529658, 0, 0, 19464234, 0, 0, 19595276, 0, 0 )
 script = ExtResource( 9 )
 
 [node name="AllFloors" parent="YSort" instance=ExtResource( 2 )]

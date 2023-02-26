@@ -54,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -96, -31 )
 script = ExtResource( 3 )
+can_continue = true
 
 [node name="Shader" parent="." instance=ExtResource( 1 )]
 
