@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
 onready var animation_player = $AnimationPlayer
+onready var fire_animation_player = $FireAnimationPlayer
 onready var sprite = $MainSprite
 onready var torchLight = $TorchLight
+onready var torchSprite = $TorchLightSprite
 onready var placeChecker = $PlaceChecker
 onready var entranceChecker = $EntranceChecker
 
@@ -52,8 +54,17 @@ func _process(delta):
 	if torch_time_remaining > 0:
 		torchLight.enabled = true;
 		max_twigs = 1
+		
+		if torch_time_remaining > (max_torch_time/3)*2:
+			fire_animation_player.play("FireLarge")
+		elif torch_time_remaining > (max_torch_time/3)*1:
+			fire_animation_player.play("FireMed")
+		else:
+			fire_animation_player.play("FireSmall")
+		
 	else:
 		torchLight.enabled = false;
+		fire_animation_player.play("NoFire")
 		max_twigs = 3
 
 func _physics_process(_delta):
@@ -80,10 +91,12 @@ func _physics_process(_delta):
 		
 	if motion.x < 0 and canMove:
 		sprite.flip_h = true
+		torchSprite.scale.x = -1
 		torchLight.scale.x = -1
 		placeChecker.position.x = -12
 	elif motion.x > 0 and canMove:
 		sprite.flip_h = false
+		torchSprite.scale.x = 1
 		torchLight.scale.x = 1
 		placeChecker.position.x = 12
 	
@@ -98,13 +111,13 @@ func _physics_process(_delta):
 			current_floor -= 1;
 			canMove = false;
 			emit_signal("move_floor", current_floor);
-			canMoveTimer = 1;
+			canMoveTimer = 0;
 			position.y += -114;
 		elif item.is_in_group("Bot") and motion.y > 0:
 			current_floor += 1;
 			canMove = false;
 			emit_signal("move_floor", current_floor);
-			canMoveTimer = 1;
+			canMoveTimer = 0;
 			position.y += 114;
 		
 	

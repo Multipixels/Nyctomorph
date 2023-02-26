@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Sprites/Background Trees.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Trees.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/Deep background.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/Environment.gd" type="Script" id=6]
 [ext_resource path="res://Shaders/Materials/generic.tres" type="Material" id=7]
+[ext_resource path="res://Sprites/Solids.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Deep background.png 0"
@@ -23,6 +24,34 @@
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
+1/name = "Solids.png 1"
+1/texture = ExtResource( 8 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 48, 42 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "Solids.png 2"
+2/texture = ExtResource( 8 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 48, 0, 48, 42 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
 
 [sub_resource type="TileSet" id=2]
 0/name = "Background Trees.png 0"
@@ -347,11 +376,11 @@ script = ExtResource( 6 )
 [node name="Background" type="TileMap" parent="."]
 material = ExtResource( 7 )
 tile_set = SubResource( 1 )
-cell_size = Vector2( 48, 84 )
+cell_size = Vector2( 48, 42 )
 cell_quadrant_size = 48
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0 )
+tile_data = PoolIntArray( -8, 1, 0, -7, 1, 0, -6, 1, 0, -5, 1, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 196600, 2, 0, 196601, 2, 0, 196602, 2, 0, 196603, 2, 0, 196604, 2, 0, 196605, 2, 0, 196606, 2, 0, 196607, 2, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 2, 0 )
 
 [node name="BackgroundTrees" type="TileMap" parent="."]
 material = ExtResource( 7 )

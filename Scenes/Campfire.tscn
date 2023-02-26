@@ -1,11 +1,122 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Campfire.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/campfire.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Campfire.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Materials/light_object.tres" type="Material" id=4]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5, 2.5 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "CampfireLight"
+length = 3.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CampfireLight:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.75, 1, 1.25, 1.75, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( -2, 0 ), Vector2( -4, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( 4, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CampfireLight:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "FireLarge"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "FireMed"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "FireSmall"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../CampfireLight:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 0 ) ]
+}
 
 [node name="Campfire" type="StaticBody2D" groups=["Campfire"]]
 material = ExtResource( 4 )
@@ -16,8 +127,25 @@ light_level = 1
 shape = SubResource( 5 )
 
 [node name="CampfireSprite" type="Sprite" parent="."]
-material = ExtResource( 4 )
-texture = ExtResource( 3 )
+position = Vector2( 0, -6 )
+texture = ExtResource( 2 )
+hframes = 12
+vframes = 2
+frame = 1
 
 [node name="CampfireLight" type="Light2D" parent="."]
+offset = Vector2( 2, 0 )
 mode = 2
+
+[node name="CampfireLightAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+autoplay = "CampfireLight"
+anims/CampfireLight = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CampfireSprite")
+anims/FireLarge = SubResource( 6 )
+anims/FireMed = SubResource( 10 )
+anims/FireSmall = SubResource( 11 )
+anims/RESET = SubResource( 7 )

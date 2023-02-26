@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/Twig.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Sticks.png" type="Texture" id=1]
 [ext_resource path="res://Shaders/Materials/light_object.tres" type="Material" id=2]
+[ext_resource path="res://Scripts/Twig.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 5.25, 3 )
+extents = Vector2( 3.90625, 2.75 )
 
 [node name="Twig" type="Area2D" groups=["Twig"]]
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
@@ -14,5 +16,6 @@ one_way_collision_margin = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 2 )
-scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+hframes = 6
+vframes = 2

@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+onready var animation_player = $AnimationPlayer
+
 #Campfire lasts 30 seconds per level. initial campfire lasts 60 seconds.
 #this means player needs to find minimum 8 twigs.
 
@@ -17,6 +19,7 @@ var light_mat1 = preload("res://Sprites/Lights/CampfireLightSmall.png")
 
 func _ready():
 	light_materials = [light_mat1, light_mat2, light_mat3];
+	select_anim()
 	update_info();
 
 func update_info():
@@ -34,6 +37,8 @@ func update_info():
 
 func _process(delta):
 	time_remaining -= delta;
+	
+	select_anim()
 	
 	if light_level != int(time_remaining+time_per_level) / time_per_level:
 		if int(time_remaining+time_per_level) / time_per_level > 3:
@@ -59,3 +64,9 @@ func switch_texture():
 	else:
 		$CampfireLight.show();
 		$CampfireLight.texture = light_materials[light_level-1];
+
+func select_anim():
+	match light_level:
+		1: animation_player.play("FireSmall")
+		2: animation_player.play("FireMed")
+		3: animation_player.play("FireLarge")

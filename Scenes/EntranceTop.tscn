@@ -1,50 +1,43 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Entrance.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Up.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Arrow.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 4 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 6, 8 )
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 6, 0, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 12, 0, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 8, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 6, 8, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 12, 8, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 6, 8 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 6, 16, 6, 8 )
-
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="Animation" id=3]
+resource_name = "move"
+length = 2.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 7 ), Vector2( 0, 8 ), Vector2( 0, 9 ) ]
+}
 
 [node name="EntranceTop" type="Area2D" groups=["Top"]]
 script = ExtResource( 1 )
@@ -53,8 +46,13 @@ send_to = Vector2( 0, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Top"]]
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 5 )
-frames = SubResource( 10 )
-frame = 2
-playing = true
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -9 )
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "move"
+playback_speed = 0.5
+anims/RESET = SubResource( 2 )
+anims/move = SubResource( 3 )
