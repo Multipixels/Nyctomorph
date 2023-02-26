@@ -47,7 +47,7 @@ send_to = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -9 )
+position = Vector2( 0.5, -9 )
 texture = ExtResource( 2 )
 hframes = 2
 

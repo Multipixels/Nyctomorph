@@ -48,7 +48,7 @@ placement = 1
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -7 )
+position = Vector2( 0.5, -7 )
 z_index = 5
 z_as_relative = false
 texture = ExtResource( 2 )
