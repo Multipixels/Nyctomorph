@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/goUp.mp3-07922e7077f646c4a4b27aeb8cf4e1db.mp3str"
+
+[deps]
+
+source_file="res://Audio/goUp.mp3"
+dest_files=[ "res://.import/goUp.mp3-07922e7077f646c4a4b27aeb8cf4e1db.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

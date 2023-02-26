@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/goDown.mp3-a42ff74befc40f667abb6cf34c3f88ea.mp3str"
+
+[deps]
+
+source_file="res://Audio/goDown.mp3"
+dest_files=[ "res://.import/goDown.mp3-a42ff74befc40f667abb6cf34c3f88ea.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

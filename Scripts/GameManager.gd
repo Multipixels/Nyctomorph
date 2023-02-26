@@ -47,6 +47,9 @@ func _on_LightsTimer_timeout() -> void:
 	for each in get_tree().get_nodes_in_group("Player"):
 		each.visible = false
 		
+	for each in get_tree().get_nodes_in_group("Sound"):
+		each.volume_db = -80;
+		
 
 
 func _on_OneSec_timeout() -> void:

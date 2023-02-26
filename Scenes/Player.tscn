@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Lights/LightBall.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Shaders/Materials/light_object.tres" type="Material" id=4]
 [ext_resource path="res://Sprites/TorchFire.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/LessSlidyCamera.gd" type="Script" id=6]
+[ext_resource path="res://Audio/pickup.mp3" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 1 )
@@ -375,6 +376,8 @@ anims/FireMed = SubResource( 21 )
 anims/FireSmall = SubResource( 22 )
 anims/NoFire = SubResource( 23 )
 
-[node name="Sounds" type="AudioStreamPlayer2D" parent="."]
+[node name="Sounds" type="AudioStreamPlayer2D" parent="." groups=["Sound"]]
+stream = ExtResource( 7 )
+autoplay = true
 
 [connection signal="move_floor" from="." to="LessSlidyCamera" method="_on_Player_move_floor"]

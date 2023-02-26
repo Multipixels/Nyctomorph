@@ -43,6 +43,9 @@ onready var fuel_sound = load("res://Audio/fuel.mp3")
 onready var invalid_sound = load("res://Audio/invalid.mp3")
 onready var pickup_sound = load("res://Audio/pickup.mp3")
 onready var place_sound = load("res://Audio/place.mp3")
+onready var down_sound = load("res://Audio/goDown.mp3")
+onready var up_sound = load("res://Audio/goUp.mp3")
+
 
 
 signal static_level(new_level)
@@ -122,12 +125,14 @@ func _physics_process(_delta):
 	for item in playerAreas:
 		if item.is_in_group("Top") and motion.y < 0:
 			current_floor -= 1;
+			play_sound(up_sound);
 			canMove = false;
 			emit_signal("move_floor", current_floor);
 			canMoveTimer = 0;
 			position.y += -114;
 		elif item.is_in_group("Bot") and motion.y > 0:
 			current_floor += 1;
+			play_sound(down_sound);
 			canMove = false;
 			emit_signal("move_floor", current_floor);
 			canMoveTimer = 0;
@@ -155,15 +160,18 @@ func _physics_process(_delta):
 	
 	for each in items:
 		
-		if current_twigs >= 1:
+		if current_twigs >= 1 and current_twigs <= 2:
 			if each.is_in_group("Campfire"):
 				tooltips = [1]
 				break;
+		elif current_twigs == 3:
+			if each.is_in_group("Campfire"):
+				tooltips = [5];
 			
 		if each.is_in_group("Campfire") and torch_time_remaining > 0:
 			tooltips.append(5)
 			tooltips.erase(3);
-		elif current_twigs <= 2 or (torch_time_remaining > 0 and current_twigs != 1):
+		elif (current_twigs <= 2 and torch_time_remaining < 0) or (torch_time_remaining > 0 and current_twigs != 1):
 			if each.is_in_group("Twig"):
 				tooltips.append(4)
 				
@@ -191,6 +199,9 @@ func _physics_process(_delta):
 				play_sound(pickup_sound);
 				each.queue_free();
 				break;
+			
+		if action:
+			play_sound(invalid_sound);
 				
 	if Input.is_action_just_pressed("consume"):
 		var action = true;
@@ -229,9 +240,6 @@ func _physics_process(_delta):
 				droppedTwig.global_position = (placeChecker.global_position + offset).round();
 	
 		if action and torch_time_remaining > 0 and current_twigs == 0:
-			if canPlace == false:
-				play_sound(invalid_sound);
-			
 			var available = true
 			var campfire = null
 			
@@ -247,6 +255,7 @@ func _physics_process(_delta):
 					item.queue_free()
 				
 				var droppedCampfire = campfire_scene.instance();
+				action = false;
 				play_sound(place_sound);
 				get_parent().add_child(droppedCampfire);
 				droppedCampfire.global_position = placeChecker.global_position.round();
@@ -257,8 +266,12 @@ func _physics_process(_delta):
 			elif campfire != null:
 				
 				campfire.add_fuel(torch_time_remaining/max_torch_time)
+				action = false;
 				play_sound(fuel_sound);
 				torch_time_remaining = 0
+				
+		if action:
+			play_sound(invalid_sound);
 	
 	######################################################################################
 

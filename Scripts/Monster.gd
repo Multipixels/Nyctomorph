@@ -127,7 +127,7 @@ func monster_action():
 	if action_complete != true and abs(distance_from_player.x) <= 2 and abs(distance_from_player.y) <= 2:
 		action_complete = true;
 		var direction;
-		print("monster within 4x4 of player:");
+		print("monster within 5x5 of player:");
 		
 		#if player near campfire, run away
 		if true in campfire_near_player:
@@ -162,7 +162,7 @@ func monster_action():
 		var index = 0;
 		for fire in distance_from_campfires:
 			if abs(fire.x) <= 2 and abs(fire.y) <= 2:
-				print("monster within 4x4 of campfire:");
+				print("monster within 5x5 of campfire:");
 				print(campfires[index].name)
 				if campfire_near_player[index] == false:
 					action_complete = true;
