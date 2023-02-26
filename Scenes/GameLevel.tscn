@@ -49,7 +49,7 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 5, 3 )
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 917509, 0, 0, 1048581, 0, 0 )
+tile_data = PoolIntArray( 786436, 0, 0, 786438, 0, 0, 917510, 0, 0 )
 script = ExtResource( 9 )
 
 [node name="AllFloors" parent="YSort" instance=ExtResource( 2 )]
