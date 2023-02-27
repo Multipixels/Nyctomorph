@@ -6,9 +6,12 @@ var win_time = 300.0;
 onready var timer = $DeathKnell
 onready var light_timer = $LightsTimer
 onready var second = $TwoSec
+onready var stickTimer = $StickTimer
 
 onready var time_ui_sprite = get_parent().get_node("UI/TimeUISprite")
 onready var pauseUI = get_parent().get_node("UI/Pause");
+
+onready var stickChecker = get_parent().get_node("YSort/Player/PlaceChecker");
 
 onready var tip1 = get_parent().get_node("UI/Tips/tip1");
 onready var tip2 = get_parent().get_node("UI/Tips/tip2");
@@ -20,7 +23,11 @@ var shownTip5 = false
 
 var isShowingTip = false;
 
+func enablePlace():
+	stickChecker.monitoring = true;
+
 func activate_tip(tip):
+	get_parent().get_node("YSort/Player/PlaceChecker").monitoring = false;
 	Engine.time_scale = 0;
 	isShowingTip = true;
 	#print("show tip ", tip)
@@ -48,15 +55,28 @@ func _input(event):
 		tip5.hide();
 		isShowingTip = false;
 		Engine.time_scale = 1;
+		timerForStickChecker();
 		
 	if pauseUI.visible and event.is_action_pressed("interact"):
 		Engine.time_scale = abs(Engine.time_scale - 1);
+		
+		if Engine.time_scale == 1:
+			timerForStickChecker()
+		else:
+			stickChecker.monitoring = false;
+		
 		get_tree().paused = !get_tree().paused;
 		
 		pauseUI.visible = !pauseUI.visible;
 	
 	if !isShowingTip and event.is_action_pressed("pause"):
 		Engine.time_scale = abs(Engine.time_scale - 1);
+		
+		if Engine.time_scale == 1:
+			timerForStickChecker()
+		else:
+			stickChecker.monitoring = false;
+		
 		get_tree().paused = !get_tree().paused;
 		
 		pauseUI.visible = !pauseUI.visible;
@@ -76,6 +96,9 @@ func _process(delta):
 	if time_passed > win_time:
 		get_tree().change_scene("res://Scenes/WinMenu.tscn")
 		
+func timerForStickChecker():
+	stickTimer.set_wait_time(0.01);
+	stickTimer.start();
 
 func _on_Monster_caught_player():
 	timer.start()

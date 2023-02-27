@@ -162,6 +162,9 @@ zoom = Vector2( 1, 2 )
 
 [node name="GameManager" parent="." instance=ExtResource( 7 )]
 pause_mode = 2
+process_priority = 3
+
+[node name="StickTimer" type="Timer" parent="GameManager"]
 
 [node name="Shader" parent="." instance=ExtResource( 5 )]
 pause_mode = 2
@@ -171,3 +174,4 @@ layer = 5
 [connection signal="static_level" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_level"]
 [connection signal="static_offset" from="YSort/Player" to="UI/StaticOverlay" method="_on_Player_static_offset"]
 [connection signal="caught_player" from="YSort/Monster" to="GameManager" method="_on_Monster_caught_player"]
+[connection signal="timeout" from="GameManager/StickTimer" to="GameManager" method="enablePlace"]

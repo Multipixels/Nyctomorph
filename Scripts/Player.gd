@@ -108,6 +108,9 @@ func _process(delta):
 
 func _physics_process(_delta):
 	
+	if Engine.time_scale == 0:
+		return;
+	
 	motionHorizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"));
 	motionVertical = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"));
 	
@@ -336,9 +339,16 @@ func _physics_process(_delta):
 			emit_signal("send_tip", 2);
 		
 		
-		if not true in campfire_near_player and not player_relocate and torch_time_remaining > 0 and current_twigs > 0:
-			player_relocate = true;
-			emit_signal("send_tip", 3);
+		if not true in campfire_near_player and not player_relocate and torch_time_remaining > 0:
+			
+			var canDo = false;
+			for item in items:
+				if item.is_in_group("Twig"):
+					canDo = true;
+			
+			if canDo:
+				player_relocate = true;
+				emit_signal("send_tip", 3);
 
 
 func walk_animate(vec):
