@@ -59,7 +59,8 @@ script = ExtResource( 9 )
 
 [node name="Campfire" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 25, 62 )
-time_remaining = 150
+time_remaining = 90
+time_per_level = 45
 
 [node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
 
