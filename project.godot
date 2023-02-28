@@ -19,6 +19,7 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://Sprites/icon.png"
+config/windows_native_icon="res://Sprites/LogoBig.ico"
 
 [autoload]
 
