@@ -9,7 +9,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href=https://github.com/Multipixels/Nyctomorph">
+  <a href="https://github.com/Multipixels/Nyctomorph">
     <img src="External/Campfire.gif" alt="Logo" width="120" height="120">
   </a>
 
